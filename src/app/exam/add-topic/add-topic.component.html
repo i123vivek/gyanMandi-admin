@@ -1,0 +1,134 @@
+<div class="container-fluid  p-0 m-0">
+    <!-- navbar starts here -->
+    <nav class="navbar navbar-expand-lg navbar-light navbar-fixed fixed-top" style="background-color: white;">
+        <a class="navbar-brand" href="">
+            <img src="assets/logo.png" width="100" height="60" class=" align-top" alt="">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <div class=" ml-auto">
+                <ul class="nav justify-content-end">
+                    <li>
+                        <a class="btn icon-profile" style="color: rgb(78, 186, 248);" href=""><i class="fa fa-user"
+                                style="font-size:24px; color: rgb(78, 186, 248);"></i> Anchal
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- navbar ends here -->
+
+    <!-- sidebar starts here -->
+    <div class="sidebar mt-4">
+        <a href="/dashboard">DASHBOARD</a>
+        <a class="active" href="/examination">EXAMINATION</a>
+        <a href="/test series">TEST SERIES</a>
+        <a href="/information">INFORMATION</a>
+        <a href="/settings">SETTINGS</a>
+    </div>
+    <!-- sidebar ends here -->
+
+    <!-- content div starts here -->
+    <div class="content clearfix pl-5 mt-5" style="z-index: 1; overflow: hidden; white-space: nowrap;">
+        <div class="row ml-2">
+            <button type="button" class="btn btn-info" (click)="goToExamination()">Back</button>
+        </div>
+        <hr>
+
+        <!-- add topic form starts here -->
+        <form [formGroup]="addTopicForm" (ngSubmit)="onSubmit()">
+
+            <div class="row mb-3" formGroupName="subject_details">
+                <div class="col-lg-3 col-xl-2" id="subForm">
+                    <label>Exam Name</label>
+                    <select class="form-control" (change)="selectedExamObj($event)" formControlName="examName">
+                        <option value="" disabled selected hidden>Select The Name of Exam</option>
+                        <option *ngFor="let exam of subjectList" value="{{exam.examName}}">{{exam.examName}}</option>
+                    </select>
+                </div>
+
+                <div class=" col-lg-3 col-xl-2">
+                    <label>Subject Name</label>
+                    <select class="form-control" formControlName="subjectName">
+                        <option value="" disabled selected hidden>Select subject</option>
+                        <option *ngFor="let subject of subArray" value="{{subject}}">{{subject}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="repeatable">
+
+                <div class="repeat-form mt-3 mb-3">
+
+                    <div class="topic-container mt-3" formArrayName="topics">
+                        <div *ngFor="let topic of getTopics(addTopicForm); let i= index" [formGroupName]="i">
+                            <div class="row">
+                                <div class="form-group col-lg-3 col-xl-2">
+                                    <label>Topic Name</label>
+                                    <input type="text" formControlName="topicName" class="form-control"
+                                        placeholder="Enter Topic Name">
+                                </div>
+
+                                <div class="form-group col-lg-3 col-xl-2">
+                                    <label>Sub Topic</label>
+                                    <input type="text" formControlName="subTopic" class="form-control"
+                                        placeholder="Enter SubTopic">
+                                </div>
+
+                                <div class="form-group col-lg-3 col-xl-2">
+                                    <label>Studying Hour</label>
+                                    <input type="text" formControlName="studyingHours" class="form-control"
+                                        placeholder="Enter Hours">
+                                </div>
+
+                                <div class="form-group col-lg-3 col-xl-2">
+                                    <label>Practicing Hours</label>
+                                    <input type="text" formControlName="practicingHours" class="form-control"
+                                        placeholder="Practice Hours">
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="mark-container row mt-3">
+                        <div *ngFor="let mark of t.controls ; let j= index" [formGroup]="mark">
+                            <div class="form-group col-md-6 mb-3">
+                                <label>Percentage Of Marks{{j+1}}</label>
+
+                                <input type="text" formControlName="percentageOfMarks" class="form-control"
+                                    placeholder="Enter marks">
+                            </div>
+                            <div class="form-group col-md-6 mt-3">
+                                <label>Standard Deviation of percentage Of marks{{j+1}}</label>
+
+                                <input type="text" formControlName="standardDeviationOfPercentageOfMarks"
+                                    class="form-control" placeholder="Enter Standard Deviation">
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                </div>
+
+
+
+                <button id="topicButton" class="repeat btn btn-info m-2" [disabled]="!addTopicForm.valid">Add More
+                    Topics</button>
+
+            </div>
+
+            <button class="btn btn-info m-1" type="submit" [disabled]="!addTopicForm.valid">Submit</button>
+            <button class="btn btn-info m-1" type="reset" (click)="onReset()">Reset</button>
+        </form>
+    </div>
+</div>

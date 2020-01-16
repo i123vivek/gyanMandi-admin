@@ -1,0 +1,68 @@
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color:rgb(18, 155, 247);
+    position: fixed;
+    height: 100vmax;
+    overflow: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+  
+.sidebar a {
+    display: block;
+    color: white;
+    padding: 16px;
+    text-decoration: none;
+}
+   
+.sidebar a.active {
+    background-color: rgb(51, 174, 245);
+    color: white;
+}
+  
+.sidebar a:hover:not(.active) {
+    background-color: rgb(51, 174, 245);
+    color: white;
+}
+  
+.navbar {
+    padding: 1px 16px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+div.content {
+    margin-left: 200px;
+    padding: 50px 20px;
+    /* height: 100vmax; */
+}
+
+.ng-valid[required] , .ng-valid.required {
+    border-left :5px solid green;  
+}
+  
+.ng-invalid:not(form) {  
+    border-left :5px solid red;
+}
+  
+.cursorPointer {
+    cursor: pointer;
+}
+  
+  
+@media screen and (max-width: 700px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .sidebar a {float: left;}
+    div.navbar {margin-left: 0;}
+}
+  
+@media screen and (max-width: 400px) {
+    .sidebar a {
+      text-align: center;
+      float: none;
+    }
+}
