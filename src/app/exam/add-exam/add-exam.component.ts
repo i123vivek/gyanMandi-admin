@@ -87,8 +87,11 @@ export class AddExamComponent implements OnInit, OnDestroy {
 
     this.phases = [1,2,3];
 
-    for (let i = 2000; i < 2100; i++) {
-      this.dropdownYear.push(i);
+    var year = new Date().getFullYear();
+    this.dropdownYear.push(year);
+
+    for (let i = 1; i < 100; i++) {
+      this.dropdownYear.push(year+i);
     }
 
     this.dropdownSettings = {
@@ -96,7 +99,7 @@ export class AddExamComponent implements OnInit, OnDestroy {
       selectAllYear: 'Select All',
       unSelectAllYear: 'UnSelect All',
       itemsShowLimit: 3,
-      allowSearchFilter: true
+      allowSearchFilter: false
     };
 
   }

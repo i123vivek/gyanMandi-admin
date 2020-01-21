@@ -76,7 +76,7 @@ div.content {
 }
 
 @media 
-only screen and (max-width: 700px)
+only screen and (max-width: 1200px)
 {
 
 	/* Force table to not be like tables anymore */
@@ -96,7 +96,7 @@ only screen and (max-width: 700px)
 	td { 
 		/* Behave  like a "row" */
 		border: none;
-		border-bottom: 1px solid #eee; 
+		border-bottom: 1px solid rgb(219, 214, 214); 
 		position: relative;
 		padding-left: 50%; 
 	}
@@ -115,22 +115,34 @@ only screen and (max-width: 700px)
 	/*
 	Label the data
 	*/
-	table.exam td:nth-of-type(1):before { content: "Sr. no."; }
-	table.exam td:nth-of-type(2):before { content: "Exam Name"; }
-	table.exam td:nth-of-type(3):before { content: "Number of phases"; }
-	table.exam td:nth-of-type(4):before { content: "Preference Order"; }
-    table.exam td:nth-of-type(5):before { content: "No. of Institutes"; }
-    table.exam td:nth-of-type(6):before { content: "No. of Students"; }
-    table.exam td:nth-of-type(7):before { content: "Status"; }
-    table.exam td:nth-of-type(8):before { content: "Actions"; }
+	table.testSeries td:nth-of-type(1):before { content: "Sr. no."; }
+	table.testSeries td:nth-of-type(2):before { content: "Institute Name"; }
+	table.testSeries td:nth-of-type(3):before { content: "Test Series"; }
+	table.testSeries td:nth-of-type(4):before { content: "Exam"; }
+    table.testSeries td:nth-of-type(5):before { content: "Phase"; }
+    table.testSeries td:nth-of-type(6):before { content: "Year"; }
+    table.testSeries td:nth-of-type(7):before { content: "Price"; }
+    table.testSeries td:nth-of-type(8):before { content: "Lang"; }
+    table.testSeries td:nth-of-type(9):before { content: "Enrolled Students"; }
+    table.testSeries td:nth-of-type(10):before { content: "Actions"; }
 
+    table.test td:nth-of-type(1):before { content: "Sr. no."; }
+    table.test td:nth-of-type(2):before { content: "Institute Name"; }
+    table.test td:nth-of-type(3):before { content: "Test"; }
+    table.test td:nth-of-type(4):before { content: "Test Series"; }
+    table.test td:nth-of-type(5):before { content: "Exam"; }
+    table.test td:nth-of-type(6):before { content: "Phase"; }
+    table.test td:nth-of-type(7):before { content: "Year"; }
+    table.test td:nth-of-type(8):before { content: "Language"; }
+    table.test td:nth-of-type(9):before { content: "Attempts"; }
+    table.test td:nth-of-type(10):before { content: "Actions"; }
 
-    table.subject td:nth-of-type(1):before { content: "Sr. no."; }
-    table.subject td:nth-of-type(2):before { content: "Exam Name"; }
-    table.subject td:nth-of-type(3):before { content: "Subject Name"; }
-    table.subject td:nth-of-type(4):before { content: "Number Of Topics"; }
-    table.subject td:nth-of-type(5):before { content: "Number Of Subtopics"; }
-    table.subject td:nth-of-type(6):before { content: "Insights"; }
-    table.subject td:nth-of-type(7):before { content: "Actions"; }
+    table.question td:nth-of-type(1):before { content: "Sr. no."; }
+    table.question td:nth-of-type(2):before { content: "Institute Name"; }
+    table.question td:nth-of-type(3):before { content: "Exam Name"; }
+    table.question td:nth-of-type(4):before { content: "Subject"; }
+    table.question td:nth-of-type(5):before { content: "Question Rating"; }
+    table.question td:nth-of-type(6):before { content: "Insights"; }
+    table.question td:nth-of-type(7):before { content: "Actions"; }
 	
 }

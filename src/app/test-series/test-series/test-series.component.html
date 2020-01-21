@@ -1,0 +1,299 @@
+<div class="container-fluid p-0 m-0">
+
+    <!-- navbar starts here -->
+    <nav class="navbar navbar-expand-lg navbar-light navbar-fixed fixed-top" style="background-color: white;">
+        <a class="navbar-brand" href="">
+            <img src="assets/logo.png" width="100" height="60" class="d-inline-block align-top" alt="">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <div class=" ml-auto">
+                <ul class="nav justify-content-end">
+                    <li>
+                        <a class="btn icon-profile" style="color: rgb(78, 186, 248);" href="">
+                            <i class="fa fa-user" style="font-size:24px; color: rgb(78, 186, 248);"></i> Anchal
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- navbar ends here -->
+
+    <!-- sidebar starts here -->
+    <div class="sidebar mt-4">
+        <a href="/dashboard">DASHBOARD</a>
+        <a href="/examination">EXAMINATION</a>
+        <a class="active" href="/test-series">TEST SERIES</a>
+        <a href="/classroom">CLASSROOM</a>
+        <!-- <a href="/information">INFORMATION</a>
+        <a href="/settings">SETTINGS</a> -->
+    </div>
+    <!-- sidebar ends here -->
+
+    <!-- content div start here -->
+    <div class="content clearfix pl-5 mt-5" style="z-index: 1; overflow: hidden; white-space: nowrap;">
+
+        <!-- row for nav tab starts here -->
+        <div class="row p-1 " id="testSeries">
+            <ul class="nav nav-tabs m-1" id="nav-tab" role="tablist">
+
+                <li class="nav-item m-1" style="background-color: lightgray;"> <a class="nav-link active"
+                        id="testseries-tab" data-toggle="tab" href="#testseries" role="tab" aria-controls="testseries"
+                        aria-selected="true">Test Series</a> </li>
+
+                <li class="nav-item m-1" style="background-color: lightgray;"> <a class="nav-link" id="test-tab"
+                        data-toggle="tab" href="#test" role="tab" aria-controls="test" aria-selected="false">Test</a>
+                </li>
+
+                <li class="nav-item m-1" style="background-color: lightgray;"> <a class="nav-link" id="question-tab"
+                        data-toggle="tab" href="#question" role="tab" aria-controls="question"
+                        aria-selected="false">Question</a> </li>
+
+            </ul>
+        </div>
+        <!-- row for nav tab ends here -->
+
+        <!-- tab content div starts here -->
+        <div class="tab-content pt-5" id="nav-tabContent">
+
+            <!-- testseries tab content starts here -->
+            <div class="tab-pane active " id="testseries" role="tabpanel" aria-labelledby="testseries-tab">
+                <div class="row ">
+                    <div class="form-group col-md-3" style="text-align: center; ">
+                            <button class="btn btn-outline-primary" style=" float: left;" type="button" (click)="goToAddTestSeries()"><i
+                                    class="fa fa-plus-square-o"
+                                    style="font-size:24px; color:rgb(39, 131, 236);"></i><span> Add
+                                    Test Series</span>
+                            </button>
+                    </div>
+
+                    <div class="input-group col-md-3 mb-4 ml-auto">
+                        <input type="text" class="form-control" placeholder="filter" aria-label="filter1"
+                            aria-describedby="filter1">
+                    </div>
+
+                    <div class="input-group col-md-3 mb-4 ml-auto">
+                        <input type="text" class="form-control" placeholder="search" aria-label="search1"
+                            aria-describedby="search1">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="search1"><i class="fa fa-search"
+                                    style="font-size:24px; color:rgb(39, 131, 236);"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="pl-0 ">
+
+                <!-- div for testSeries table starts here -->
+                <div class='row' >
+                    <div class="col-sm-12 mt-1 ml-0">
+                        <table class='table testSeries table-bordered table-condensed table-striped table-hover'>
+                            <thead>
+                                <tr>
+                                    <th>Sr. no.</th>
+                                    <th>Institute Name</th>
+                                    <th>Test Series</th>
+                                    <th>Exam</th>
+                                    <th>Phase</th>
+                                    <th>Year</th>
+                                    <th>Price</th>
+                                    <th>Lang</th>
+                                    <th>Enrolled Students</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr class="clearfix cursorPointer"
+                                    *ngFor="let testSeries of testSeriesList | paginate: { id: 'pagination1', itemsPerPage: count, currentPage: p };">
+                                    <td>{{testSeries.Id}}</td>
+                                    <td>{{testSeries.InstituteName}}</td>
+                                    <td>{{testSeries.TestSeries}}</td>
+                                    <td>{{testSeries.ExamName}}</td>
+                                    <td>{{testSeries.ExamPhase}}</td>
+                                    <td>{{testSeries.ExamYear}}</td>
+                                    <td>{{testSeries.Price}}</td>
+                                    <td>{{testSeries.Language}}</td>
+                                    <td>{{testSeries.EnrolledStudents}}</td>
+                                    <td><i class="fa fa-edit" style="font-size:24px;color:rgb(39, 131, 236);"></i>
+                                        &nbsp; <i class="fa fa-trash-o"
+                                            style="font-size:24px;color:rgb(39, 131, 236);"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- div for testSeries table ends here -->
+
+                <br>
+
+                <!-- pagination div for topic starts here -->
+                <div class="text-center ">
+                    <pagination-controls id="pagination1" (pageChange)="p = $event"></pagination-controls>
+                </div>
+                <!-- pagination div for topic ends here -->
+
+            </div>
+            <!-- testseries tab content ends here -->
+
+            <!-- div for test tabs -->
+            <div class="tab-pane fade" id="test" role="tabpanel" aria-labelledby="test-tab">
+                <div class="row ">
+                    <div class="form-group col-md-3" style="text-align: center;">                       
+                            <button class="btn btn-outline-primary" style=" float: left;" type="button" (click)="goToAddTest()"><i
+                                    class="fa fa-plus-square-o"
+                                    style="font-size:24px; color:rgb(39, 131, 236);"></i><span> Add
+                                    Test</span></button>
+                    </div>
+
+                    <div class="input-group col-md-3 mb-4 ml-auto">
+                        <input type="text" class="form-control" placeholder="filter" aria-label="filter1"
+                            aria-describedby="filter1">
+                    </div>
+
+                    <div class="input-group col-md-3 mb-4 ml-auto">
+                        <input type="text" class="form-control" placeholder="search" aria-label="search1"
+                            aria-describedby="search1">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="search1"><i class="fa fa-search"
+                                    style="font-size:24px; color:rgb(39, 131, 236);"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <!-- div for Test table starts here -->
+                <div class='row'>
+                    <div class="col-sm-12 mt-1 ml-0">
+                        <table class='table test table-bordered table-condensed table-striped table-hover'>
+                            <thead>
+                                <tr>
+                                    <th>Sr. no.</th>
+                                    <th>Institute Name</th>
+                                    <th>Test</th>
+                                    <th>Test Series</th>
+                                    <th>Exam</th>
+                                    <th>Phase</th>
+                                    <th>Year</th>
+                                    <th>Language</th>
+                                    <th>Attempts</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr class="clearfix cursorPointer"
+                                    *ngFor="let test of testList | paginate: { id: 'pagination2', itemsPerPage: count, currentPage: p };">
+                                    <td>{{test.Id}}</td>
+                                    <td>{{test.InstituteName}}</td>
+                                    <td>{{test.Test}}</td>
+                                    <td>{{test.TestSeries}}</td>
+                                    <td>{{test.ExamName}}</td>
+                                    <td>{{test.ExamPhase}}</td>
+                                    <td>{{test.ExamYear}}</td>
+                                    <td>{{test.Language}}</td>
+                                    <td>{{test.Attempts}}</td>
+                                    <td>
+                                        <a [routerLink]="['/test-series/addQuestion']">Questions</a> &nbsp;
+                                        <i class="fa fa-edit" style="font-size:24px;color:rgb(39, 131, 236);"></i>
+                                        &nbsp; <i class="fa fa-trash-o"
+                                            style="font-size:24px;color:rgb(39, 131, 236);"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- div for Test table ends here -->
+
+                <br>
+
+                <!-- pagination div for Test starts here -->
+                <div class="text-center ">
+                    <pagination-controls id="pagination2" (pageChange)="p = $event"></pagination-controls>
+                </div>
+                <!-- pagination div for Test ends here -->
+            </div>
+            <!-- div for test tabs ends-->
+
+
+            <!-- div for Question tabs starts here-->
+            <div class="tab-pane fade" id="question" role="tabpanel" aria-labelledby="question-tab">
+                <div class="row ">
+
+                    <div class="input-group col-md-3 mb-4 ml-auto">
+                        <input type="text" class="form-control" placeholder="filter" aria-label="filter1"
+                            aria-describedby="filter1">
+                    </div>
+
+                    <div class="input-group col-md-3 mb-4 ml-auto">
+                        <input type="text" class="form-control" placeholder="search" aria-label="search1"
+                            aria-describedby="search1">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="search1"><i class="fa fa-search"
+                                    style="font-size:24px; color:rgb(39, 131, 236);"></i></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <!-- div for Question table starts here -->
+                <div class='row'>
+                    <div class="col-sm-12 mt-1 ml-0">
+                        <table class='table question table-bordered table-condensed table-striped table-hover'>
+                            <thead>
+                                <tr>
+                                    <th>Sr. no.</th>
+                                    <th>Institute Name</th>
+                                    <th>Exam Name</th>
+                                    <th>Subject</th>
+                                    <th>Question Rating</th>
+                                    <th>Insights</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr class="clearfix cursorPointer"
+                                    *ngFor="let question of QuestionList | paginate: { id: 'pagination3', itemsPerPage: count, currentPage: p };">
+                                    <td>{{question.Id}}</td>
+                                    <td>{{question.InstituteName}}</td>
+                                    <td>{{question.ExamName}}</td>
+                                    <td>{{question.Subject}}</td>
+                                    <td>{{question.QuestionRating}}</td>
+                                    <td><button type="button" class="btn btn-link">Click</button></td>
+                                    <td><i class="fa fa-edit" style="font-size:24px;color:rgb(39, 131, 236);"></i>
+                                        &nbsp; <i class="fa fa-trash-o"
+                                            style="font-size:24px;color:rgb(39, 131, 236);"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- div for question table ends here -->
+
+                <br>
+
+                <!-- pagination div for question starts here -->
+                <div class="text-center ">
+                    <pagination-controls id="pagination3" (pageChange)="p = $event"></pagination-controls>
+                </div>
+                <!-- pagination div for question ends here -->
+            </div>
+            <!-- div for Question tabs ends here-->
+
+        </div>
+        <!-- tab content div ends here -->
+
+    </div>
+    <!-- content div ends here -->
+
+</div>

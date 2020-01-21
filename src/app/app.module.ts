@@ -18,6 +18,7 @@ import { ExamService } from './exam.service';
 //import { AddExamComponent } from './exam/add-exam/add-exam.component';
 import { ExamModule } from './exam/exam.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { TestSeriesModule } from './test-series/test-series.module';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     CKEditorModule,
     FormsModule,
     ExamModule,
+    TestSeriesModule,
     NgbModule,
     ToastrModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot()

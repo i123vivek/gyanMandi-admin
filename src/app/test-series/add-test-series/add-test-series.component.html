@@ -1,0 +1,221 @@
+<div class="container-fluid  p-0 m-0">
+    <!-- navbar starts here -->
+    <nav class="navbar navbar-expand-lg navbar-light navbar-fixed fixed-top" style="background-color: white;">
+        <a class="navbar-brand" href="">
+            <img src="assets/logo.png" width="100" height="60" class=" align-top" alt="">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <div class=" ml-auto">
+                <ul class="nav justify-content-end">
+                    <li>
+                        <a class="btn icon-profile" style="color: rgb(78, 186, 248);" href=""><i class="fa fa-user"
+                                style="font-size:24px; color: rgb(78, 186, 248);"></i> Anchal
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- navbar ends here -->
+
+    <!-- sidebar starts here -->
+    <div class="sidebar mt-4">
+        <a href="/dashboard">DASHBOARD</a>
+        <a href="/examination">EXAMINATION</a>
+        <a class="active" href="/test series">TEST SERIES</a>
+        <a href="/classroom">CLASSROOM</a>
+        <!-- <a href="/information">INFORMATION</a>
+        <a href="/settings">SETTINGS</a> -->
+    </div>
+    <!-- sidebar ends here -->
+
+    <!-- content div starts here -->
+    <div class="content clearfix pl-5 mt-5" style="z-index: 1; overflow: hidden; white-space: nowrap;">
+        <div class="row ml-1">
+            <button type="button" class="btn btn-info" (click)="goToTestSeries()">Back</button>
+        </div>
+        <hr>
+
+        <!-- add topic form starts here -->
+        <form [formGroup]="addTestSeriesForm" (ngSubmit)="onSubmit()">
+            <div class="row pt-3 mb-5">
+                <div class="col-lg-4 col-xl-3 pr-5 mr-5">
+                    <label>Institute Name</label>
+                    <select class="form-control" (change)="selectedInstitute($event)" formControlName="instituteName">
+                        <option value="" disabled selected hidden>Institute Name</option>
+                        <option *ngFor="let institute of testSeriesList" value="{{institute.InstituteName}}">
+                            {{institute.InstituteName}}</option>
+                    </select>
+                </div>
+
+                <div class=" col-lg-4 col-xl-3 pr-5 mr-5">
+                    <label>Exam Name</label>
+                    <select class="form-control" (change)="selectedExam($event)" formControlName="examName">
+                        <option value="" disabled selected hidden>Select exam</option>
+                        <option *ngFor="let exam of examList" value="{{exam.examName}}">{{exam.examName}}</option>
+                    </select>
+                </div>
+
+                <div class=" col-lg-4 col-xl-3 pr-5 mr-5">
+                    <label>Exam Year</label>
+                    <select class="form-control" formControlName="examYear">
+                        <option value="" disabled selected hidden>Select year</option>
+                        <option *ngFor="let year of examYearList" value="{{year}}">{{year}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div formGroupName="testSeries">
+                <div class="row  pt-2 mb-5">
+                    <div class="col-lg-4 col-xl-3 pr-5 mr-5">
+                        <label>Test Series Name</label>
+                        <input type="text" formControlName="testSeriesName" class="form-control"
+                            placeholder="Test Series Name">
+                    </div>
+
+                    <div class="col-lg-4 col-xl-3 pr-5 mr-5">
+                        <label>Test Series Image</label>
+                        <input type="file" class="form-control-file" formControlName="testSeriesImage" id="photo"
+                            multiple>
+                    </div>
+
+                    <div class="col-lg-4 col-xl-3 pr-5 mr-5">
+                        <label>Test Series Price</label>
+                        <input type="text" formControlName="testSeriesPrice" class="form-control"
+                            placeholder="Test Series Price">
+                    </div>
+                </div>
+                <div class="row  pt-2 mb-5">
+
+                    <div class="col-lg-4 col-xl-3 pr-5 mr-5">
+                        <label>Start Date</label>
+                        <input type="date" formControlName="startDate" class="form-control" placeholder="Start Date">
+                        <div *ngIf="!(startDate.invalid && (startDate.dirty || startDate.touched))" >
+                            
+                            <div class="alert alert-danger" *ngIf="today > startDate.value">
+                                start date is incorrect.
+                            </div>
+                        </div><div *ngIf="(startDate.invalid && (startDate.dirty || startDate.touched))" class="alert alert-danger" >
+                            Please enter valid Date.
+                        </div>
+
+                    </div>
+                    
+                    <div class="col-lg-4 col-xl-3 pr-5 mr-5">
+                        <label>End Date</label>
+                        <input type="date" formControlName="endDate" class="form-control" placeholder="End Date">
+                        <div *ngIf="!(endDate.invalid && (endDate.dirty || endDate.touched))" >
+                            <div class="alert alert-danger" *ngIf="startDate.value > endDate.value">
+                                end date is incorrect.
+                            </div>
+                            
+                        </div>
+                        <div *ngIf="(endDate.invalid && (endDate.dirty || endDate.touched))" class="alert alert-danger" >
+                            Please enter valid Date.
+                        </div>
+                        
+                    </div>
+                    
+                        
+                   
+
+                    <div class="col-lg-4 col-xl-3 pr-5 mr-5">
+                        <label>Number of Tests</label>
+                        <input type="text" formControlName="noOfTests" class="form-control"
+                            placeholder="Number of Tests">
+                    </div>
+                </div>
+                <div class="row  pt-2 mb-5">
+
+                    <div class="col-lg-4 col-xl-3 pr-5 mr-5">
+                        <label>Number of Free Test</label>
+                        <input type="text" formControlName="noOfFreeTest" class="form-control"
+                            placeholder="Number of Free Test">
+                    </div>
+                    <div class="col-lg-4 col-xl-3 pr-5 mr-5">
+                        <label>Number of Mock Test</label>
+                        <input type="text" formControlName="noOfMockTest" class="form-control"
+                            placeholder="Number of Mock Test">
+                    </div>
+                    <div class="col-lg-4 col-xl-3 pr-5 mr-5">
+                        <label>Number of Live Test</label>
+                        <input type="text" formControlName="noOfLiveTest" class="form-control"
+                            placeholder="Number of Live Test">
+                    </div>
+                </div>
+                <div class="row  pt-2 mb-5">
+                    <div class="col pr-5 mr-5">
+                        <label>Description</label>
+                        <textarea class="form-control" id="editor1" formControlName="description"
+                            data-sample-short></textarea>
+                    </div>
+                </div>
+                <div class="row  pt-2 mb-5">
+                    <div class="col-md-6 pr-5 mr-5">
+                        <label><i class="fa fa-cloud-upload" style="font-size:24px;color: rgb(78, 186, 248);"></i>
+                            <span> Attach File </span></label>
+                        <input type="file" class="form-control-file" formControlName="descriptionPdf" id="description"
+                            multiple>
+                    </div>
+                </div>
+                <div class="row  pt-2 mb-5">
+                    <div class="col pr-5 mr-5">
+                        <label>Time Table</label>
+                        <textarea class="form-control" id="editor2" formControlName="timeTable"
+                            data-sample-short></textarea>
+                    </div>
+                </div>
+                <div class="row  pt-2 mb-5">
+                    <div class="col-md-6 pr-5 mr-5">
+                        <label><i class="fa fa-cloud-upload" style="font-size:24px;color: rgb(78, 186, 248);"></i>
+                            <span> Attach File </span></label>
+                        <input type="file" class="form-control-file" formControlName="timeTablePdf" id="timeTable"
+                            multiple>
+                    </div>
+                </div>
+
+                <div class="row pt-2 mb-5">
+                    <div class="col-lg-4 col-xl-3 pr-5 mr-5">
+                        <label>Calculator</label>
+                        <select class="form-control" formControlName="showCalculator">
+                            <option value="" disabled selected hidden>Show Calculator</option>
+                            <option *ngFor="let i of ['yes','no']" value="{{i}}">
+                                {{i}}</option>
+                        </select>
+                    </div>
+
+                    <div class=" col-lg-4 col-xl-3 pr-5 mr-5">
+                        <label>Language</label>
+                        <select class="form-control" formControlName="language">
+                            <option value="" disabled selected hidden>Select Language</option>
+                            <option *ngFor="let j of ['English','Hindi','Gujarati']" value="{{j}}">{{j}}</option>
+                        </select>
+                    </div>
+
+                    <div class=" col-lg-4 col-xl-3 pr-5 mr-5">
+                        <label>Status</label>
+                        <select class="form-control" formControlName="status">
+                            <option value="" disabled selected hidden>Select Status</option>
+                            <option *ngFor="let y of ['Active','Inactive']" value="{{y}}">{{y}}</option>
+                        </select>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <button class="btn btn-info " style="margin:5px;" type="submit"
+                [disabled]="!addTestSeriesForm.valid">Save</button>
+            <button class="btn btn-info " style="margin:5px;" type="cancel" (click)="goBack()">Cancel</button>
+
+        </form>
+    </div>
+    <!-- content div ends here -->
+</div>
