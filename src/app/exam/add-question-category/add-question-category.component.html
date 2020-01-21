@@ -39,7 +39,7 @@
     <!-- content div starts here -->
     <div class="content clearfix pl-5 mt-5" style="z-index: 1; overflow: hidden; white-space: nowrap;">
         
-        <div class="row ml-2">
+        <div class="row ml-1">
             <button type="button" class="btn btn-info" (click)="goToExamination()">Back</button>
         </div>
         <hr>
@@ -47,8 +47,8 @@
         <!-- add question form starts here -->
         <form [formGroup]="addQuestionForm" (ngSubmit)="onSubmit()">
 
-            <div class="row">
-                <div id="exForm" class="form-group col-lg-3 col-xl-2">
+            <div class="row pt-3 mb-5">
+                <div id="exForm" class="form-group col-lg-4 col-xl-3 pr-5 mr-5">
                     <label>Exam Name</label>
                     <select class="form-control" formControlName="examName">
                         <option value="" disabled selected hidden>Select The Name of Exam</option>
@@ -59,8 +59,8 @@
 
             <div formArrayName="questionCategory">
                 <div *ngFor="let question of questionCategory.controls; let i= index">
-                    <div class="row">
-                        <div class="form-group col-lg-3 col-xl-2">
+                    <div class="row pt-2 mb-5">
+                        <div class="form-group col-lg-4 col-xl-3 pr-5 mr-5">
                             <label>Question Category {{i+1}}</label>
                             <input type="text" [formControlName]="i" class="form-control"
                                 placeholder="Enter Subject Name">

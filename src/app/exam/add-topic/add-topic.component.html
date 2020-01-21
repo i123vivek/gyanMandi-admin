@@ -38,7 +38,7 @@
 
     <!-- content div starts here -->
     <div class="content clearfix pl-5 mt-5" style="z-index: 1; overflow: hidden; white-space: nowrap;">
-        <div class="row ml-2">
+        <div class="row ml-1">
             <button type="button" class="btn btn-info" (click)="goToExamination()">Back</button>
         </div>
         <hr>
@@ -46,8 +46,8 @@
         <!-- add topic form starts here -->
         <form [formGroup]="addTopicForm" (ngSubmit)="onSubmit()">
 
-            <div class="row mb-3" formGroupName="subject_details">
-                <div class="col-lg-3 col-xl-2" id="subForm">
+            <div class="row pt-3 mb-5" formGroupName="subject_details">
+                <div class="col-lg-4 col-xl-3 pr-5 mr-5" id="subForm">
                     <label>Exam Name</label>
                     <select class="form-control" (change)="selectedExamObj($event)" formControlName="examName">
                         <option value="" disabled selected hidden>Select The Name of Exam</option>
@@ -55,7 +55,7 @@
                     </select>
                 </div>
 
-                <div class=" col-lg-3 col-xl-2">
+                <div class=" col-lg-4 col-xl-3 pr-5 mr-5">
                     <label>Subject Name</label>
                     <select class="form-control" formControlName="subjectName">
                         <option value="" disabled selected hidden>Select subject</option>
@@ -68,28 +68,31 @@
 
                 <div class="repeat-form mt-3 mb-3">
 
-                    <div class="topic-container mt-3" formArrayName="topics">
+                    <div class="topic-container" formArrayName="topics">
                         <div *ngFor="let topic of getTopics(addTopicForm); let i= index" [formGroupName]="i">
-                            <div class="row">
-                                <div class="form-group col-lg-3 col-xl-2">
+                            <div class="row pt-3 mb-5">
+                                <div class="form-group col-lg-4 col-xl-3 pr-5 mr-5">
                                     <label>Topic Name</label>
                                     <input type="text" formControlName="topicName" class="form-control"
                                         placeholder="Enter Topic Name">
                                 </div>
 
-                                <div class="form-group col-lg-3 col-xl-2">
+                                <div class="form-group col-lg-4 col-xl-3 pr-5 mr-5">
                                     <label>Sub Topic</label>
                                     <input type="text" formControlName="subTopic" class="form-control"
                                         placeholder="Enter SubTopic">
                                 </div>
 
-                                <div class="form-group col-lg-3 col-xl-2">
+                                
+                            </div>
+                            <div class="row pt-3 mb-5">
+                                <div class="form-group col-lg-4 col-xl-3 pr-5 mr-5">
                                     <label>Studying Hour</label>
                                     <input type="text" formControlName="studyingHours" class="form-control"
                                         placeholder="Enter Hours">
                                 </div>
 
-                                <div class="form-group col-lg-3 col-xl-2">
+                                <div class="form-group col-lg-4 col-xl-3 pr-5 mr-5">
                                     <label>Practicing Hours</label>
                                     <input type="text" formControlName="practicingHours" class="form-control"
                                         placeholder="Practice Hours">
@@ -101,22 +104,21 @@
 
                     </div>
 
-                    <div class="mark-container row mt-3">
-                        <div *ngFor="let mark of t.controls ; let j= index" [formGroup]="mark">
-                            <div class="form-group col-md-6 mb-3">
+                    
+                        <div class="mark-container row pt-2 mb-5" *ngFor="let mark of t.controls ; let j= index" [formGroup]="mark">
+                            <div class="form-group col-lg-4 col-xl-3 pr-5 mr-5">
                                 <label>Percentage Of Marks{{j+1}}</label>
 
                                 <input type="text" formControlName="percentageOfMarks" class="form-control"
                                     placeholder="Enter marks">
                             </div>
-                            <div class="form-group col-md-6 mt-3">
+                            <div class="form-group col-lg-4 col-xl-3 pr-5 mr-5">
                                 <label>Standard Deviation of percentage Of marks{{j+1}}</label>
 
                                 <input type="text" formControlName="standardDeviationOfPercentageOfMarks"
                                     class="form-control" placeholder="Enter Standard Deviation">
                             </div>
                         </div>
-                    </div>
 
                     <hr>
                 </div>

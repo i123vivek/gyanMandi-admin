@@ -38,7 +38,7 @@
 
     <!-- content div starts here -->
     <div class="content clearfix pl-5 mt-5" style="z-index: 1; overflow: hidden; white-space: nowrap;">
-        <div class="row ml-2">
+        <div class="row ml-1">
             <button type="button" class="btn btn-info" (click)="goToExamination()">Back</button>
         </div>
         <hr>
@@ -47,8 +47,8 @@
 
 
 
-            <div class="row">
-                <div id="exForm" class="form-group col-lg-3 col-xl-2">
+            <div class="row pt-3 mb-5">
+                <div id="exForm" class="form-group col-lg-4 col-xl-3 pr-5 mr-5">
                     <label>Exam Name</label>
                     <select class="form-control" (change)="selectPhaseNumber($event)" formControlName="examName">
                         <option value="" disabled selected hidden>Select The Name of Exam</option>
@@ -65,8 +65,8 @@
 
                     <div [formGroup]="sub">
 
-                        <div class="row">
-                            <div class="form-group col-lg-3 col-xl-2">
+                        <div class="row pt-2 mb-5">
+                            <div class="form-group col-lg-4 col-xl-3 pr-5 mr-5">
                                 <!-- <p>suv is {{sub.weightages}}</p> -->
                                 <label>Subject Name</label>
                                 <input type="text" formControlName="subjectName" class="form-control"
@@ -76,10 +76,10 @@
 
                         <div formArrayName="weightages">
 
-                            <div class="row">
+                            <div class="row pt-2 mb-5">
 
                                 <!-- let weight of weightageFun.controls; -->
-                                <div class="form-group col-lg-3 col-xl-2"
+                                <div class="form-group col-lg-4 col-xl-3 pr-5 mr-5"
                                     *ngFor="let weight of sub.get('weightages').controls;  let j= index"
                                     [formGroupName]="j">
 

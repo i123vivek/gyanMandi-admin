@@ -7,7 +7,7 @@ import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { from } from 'rxjs';
 import * as $ from 'jquery';
 import { Location } from "@angular/common";
-import { compareEndDateValidator } from 'src/app/compare-date';
+import { compareEndDateValidator, compareStartDateValidator } from 'src/app/compare-date';
 
 @Component({
   selector: 'app-add-test-series',
@@ -129,11 +129,11 @@ export class AddTestSeriesComponent implements OnInit, OnDestroy {
         showCalculator: ['',Validators.required],
         language: ['',Validators.required],
         status: ['',Validators.required],  
-        //today :  [this.datepipe.transform(new Date(), 'yyyy-MM-dd')],      
+        todayDate :  [this.datepipe.transform(new Date(), 'yyyy-MM-dd')],      
         startDate: [null, Validators.required],
         endDate: [null,Validators.required ]      
       }, {validator: Validators.compose([
-        //compareStartDateValidator('today', 'startDate'),
+        compareStartDateValidator('todayDate', 'startDate'),
         compareEndDateValidator('startDate', 'endDate')
       ]) }
       )

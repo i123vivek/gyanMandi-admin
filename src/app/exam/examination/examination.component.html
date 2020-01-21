@@ -41,7 +41,7 @@
     <div class="content clearfix pl-5 mt-5" style="z-index: 1; overflow: hidden; white-space: nowrap;">
 
         <!-- row for nav tab starts here -->
-        <div class="row pl-5" id="examination">
+        <div class="row p-1" id="examination">
             <ul class="nav nav-tabs m-1" id="nav-tab" role="tablist">
                 <li class="nav-item m-1" style="background-color: lightgray;"> <a class="nav-link active"
                         id="addExam-tab" data-toggle="tab" href="#exam" role="tab" aria-controls="exam"
@@ -69,13 +69,13 @@
             <div class="tab-pane active" id="exam" role="tabpanel" aria-labelledby="exam-tab">
                 <div class="row ">
                     <div class="form-group col-md-3" style="text-align: center;">
-                        <div class="add-remove buttons-popup">
-                            <button class="btn btn-outline-primary" type="button" (click)="goToAddExam()"><i
-                                    class="fa fa-plus-square-o"
-                                    style="font-size:24px; color:rgb(39, 131, 236);"></i><span> Add
-                                    exam</span>
-                            </button>
-                        </div>
+
+                        <button class="btn btn-outline-primary" style=" float: left;" type="button"
+                            (click)="goToAddExam()"><i class="fa fa-plus-square-o"
+                                style="font-size:24px; color:rgb(39, 131, 236);"></i><span> Add
+                                exam</span>
+                        </button>
+
                     </div>
 
                     <div class="input-group col-md-3 mb-4 ml-auto">
@@ -145,12 +145,10 @@
                 <div class="row ">
 
                     <div class="form-group col-md-3" style="text-align: center;">
-                        <div class="add-remove buttons-popup">
-                            <button class="btn btn-outline-primary" type="button" (click)="goToAddSubject()"><i
-                                    class="fa fa-plus-square-o"
-                                    style="font-size:24px; color:rgb(39, 131, 236);"></i><span> Add
-                                    subject</span></button>
-                        </div>
+                        <button class="btn btn-outline-primary" style=" float: left;" type="button"
+                            (click)="goToAddSubject()"><i class="fa fa-plus-square-o"
+                                style="font-size:24px; color:rgb(39, 131, 236);"></i><span> Add
+                                subject</span></button>
                     </div>
 
                     <div class="input-group col-md-3 mb-4 ml-auto">
@@ -226,12 +224,10 @@
             <div class="tab-pane fade" id="topic" role="tabpanel" aria-labelledby="topic-tab">
                 <div class="row ">
                     <div class="form-group col-md-3" style="text-align: center;">
-                        <div class="add-remove buttons-popup">
-                            <button class="btn btn-outline-primary" type="button" (click)="goToAddTopic()"><i
-                                    class="fa fa-plus-square-o"
-                                    style="font-size:24px; color:rgb(39, 131, 236);"></i><span> Add
-                                    topic</span></button>
-                        </div>
+                        <button class="btn btn-outline-primary" style=" float: left;" type="button"
+                            (click)="goToAddTopic()"><i class="fa fa-plus-square-o"
+                                style="font-size:24px; color:rgb(39, 131, 236);"></i><span> Add
+                                topic</span></button>
                     </div>
 
                     <div class="input-group col-md-3 mb-4 ml-auto">
@@ -299,12 +295,10 @@
             <div class="tab-pane fade" id="question" role="tabpanel" aria-labelledby="question-tab">
                 <div class="row ">
                     <div class="form-group col-md-3" style="text-align: center;">
-                        <div class="add-remove buttons-popup">
-                            <button class="btn btn-outline-primary" type="button" (click)="goToAddQuestionCategory()"><i
-                                    class="fa fa-plus-square-o"
-                                    style="font-size:24px; color:rgb(39, 131, 236);"></i><span> Add
-                                    Questions Category</span></button>
-                        </div>
+                        <button class="btn btn-outline-primary" style=" float: left;" type="button"
+                            (click)="goToAddQuestionCategory()"><i class="fa fa-plus-square-o"
+                                style="font-size:24px; color:rgb(39, 131, 236);"></i><span> Add
+                                Questions Category</span></button>
                     </div>
 
                     <div class="input-group col-md-3 mb-4 ml-auto">
