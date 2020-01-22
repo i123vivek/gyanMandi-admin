@@ -96,13 +96,8 @@
 
                     <div class="col-lg-4 col-xl-3 pr-5 mr-5">
                         <label>Start Date</label>
-                        <input type="date" formControlName="startDate" class="form-control" placeholder="Start Date">
-                        <div *ngIf="!(startDate.invalid && (startDate.dirty || startDate.touched))" >
-                            
-                            <div class="alert alert-danger" *ngIf="today > startDate.value">
-                                start date is incorrect.
-                            </div>
-                        </div><div *ngIf="(startDate.invalid && (startDate.dirty || startDate.touched))" class="alert alert-danger" >
+                        <input type="date" [min]="today" formControlName="startDate" class="form-control" placeholder="Start Date">
+                        <div *ngIf="(startDate.invalid && (startDate.dirty || startDate.touched))" class="alert alert-danger" >
                             Please enter valid Date.
                         </div>
 
@@ -110,10 +105,10 @@
                     
                     <div class="col-lg-4 col-xl-3 pr-5 mr-5">
                         <label>End Date</label>
-                        <input type="date" formControlName="endDate" class="form-control" placeholder="End Date">
+                        <input type="date" [min]="today" formControlName="endDate" class="form-control" placeholder="End Date">
                         <div *ngIf="!(endDate.invalid && (endDate.dirty || endDate.touched))" >
-                            <div class="alert alert-danger" *ngIf="startDate.value > endDate.value">
-                                end date is incorrect.
+                            <div class="alert alert-danger" style="display: inline-block;" *ngIf="startDate.value > endDate.value">
+                                end date must be greater than start date.
                             </div>
                             
                         </div>

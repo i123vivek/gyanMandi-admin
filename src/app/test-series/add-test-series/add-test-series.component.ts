@@ -76,6 +76,7 @@ export class AddTestSeriesComponent implements OnInit, OnDestroy {
   selectedExamName: any;
   examYearList: any = [];
   today =  this.datepipe.transform(new Date(), 'yyyy-MM-dd');
+  //minDate = moment(new Date()).format('YYYY-MM-DD')
   
 
   constructor(private fb: FormBuilder, public datepipe: DatePipe, public toastr: ToastrManager, private location: Location, private _route: ActivatedRoute, private router: Router, private renderer2: Renderer2, @Inject(DOCUMENT) private _document) { }
