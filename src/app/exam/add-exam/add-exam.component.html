@@ -187,8 +187,12 @@
 
             <div class="form-group aboutExamForm mt-4 pt-2 mb-5">
                 <label for="aboutExam">About Exam</label>
-                <textarea class="form-control" id="editor1" [(ngModel)]="aboutExam" name="aboutExam"
-                    data-sample-short></textarea>
+                <!-- <textarea class="form-control" id="editor1" [(ngModel)]="aboutExam" name="aboutExam"
+                    data-sample-short></textarea> -->
+
+                    <ckeditor  type="text" tagName="textarea" [(ngModel)]="aboutExam" name="aboutExam"
+                            [config]="ckeConfig" debounce="500" (change)="onCkeChange($event)" data-sample-short>
+                        </ckeditor>
             </div>
 
             <div class="row form-group pt-2 mb-5">
@@ -203,8 +207,11 @@
 
             <div class="form-group examPatternForm mt-4 pt-2 mb-5">
                 <label for="examPattern">Exam Pattern</label>
-                <textarea class="form-control" id="editor2" [(ngModel)]="examPattern" name="examPattern"
-                    data-sample-short></textarea>
+                <!-- <textarea class="form-control" id="editor2" [(ngModel)]="examPattern" name="examPattern"
+                    data-sample-short></textarea> -->
+                    <ckeditor  type="text" tagName="textarea" [(ngModel)]="examPattern" name="examPattern"
+                            [config]="ckeConfig" debounce="500" (change)="onCkeChange($event)" data-sample-short>
+                        </ckeditor>
             </div>
 
             <div class="row form-group pt-2 mb-5">
@@ -219,8 +226,12 @@
 
             <div class="form-group syllabusForm mt-4 pt-2 mb-5">
                 <label for="syllabus">Syllabus</label>
-                <textarea class="form-control" id="editor3" [(ngModel)]="Syllabus" name="Syllabus"
-                    data-sample-short></textarea>
+                <!-- <textarea class="form-control" id="editor3" [(ngModel)]="Syllabus" name="Syllabus"
+                    data-sample-short></textarea> -->
+
+                    <ckeditor  type="text" tagName="textarea" [(ngModel)]="Syllabus" name="Syllabus"
+                            [config]="ckeConfig" debounce="500" (change)="onCkeChange($event)" data-sample-short>
+                        </ckeditor>
             </div>
 
             <div class="row form-group pt-2 mb-5">

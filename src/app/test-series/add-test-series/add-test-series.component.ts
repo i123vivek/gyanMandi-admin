@@ -9,6 +9,7 @@ import * as $ from 'jquery';
 import { Location } from "@angular/common";
 import { compareEndDateValidator, compareStartDateValidator } from 'src/app/compare-date';
 
+
 @Component({
   selector: 'app-add-test-series',
   templateUrl: './add-test-series.component.html',
@@ -76,40 +77,42 @@ export class AddTestSeriesComponent implements OnInit, OnDestroy {
   selectedExamName: any;
   examYearList: any = [];
   today =  this.datepipe.transform(new Date(), 'yyyy-MM-dd');
-  //minDate = moment(new Date()).format('YYYY-MM-DD')
+  ckeConfig: any;
   
 
   constructor(private fb: FormBuilder, public datepipe: DatePipe, public toastr: ToastrManager, private location: Location, private _route: ActivatedRoute, private router: Router, private renderer2: Renderer2, @Inject(DOCUMENT) private _document) { }
 
   ngOnInit() {
-    console.log("today",this.today)
 
-    const s = this.renderer2.createElement('script');
-    s.type = 'text/javascript';
-    s.text = `
-    {
-      CKEDITOR.replace('editor1', {
-        extraPlugins: 'mathjax',
-        mathJaxLib: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML',
-        height: 320,
-        validationRules: {required: true}
-      });
-    }
-    `;
-    this.renderer2.appendChild(this._document.body, s);
+    this.ckeConfig = {
+      allowedContent: false,
+      extraPlugins: 'divarea,mathjax,easyimage',
+      mathJaxLib: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML',
+      forcePasteAsPlainText: true,
+      pasteFromWordRemoveFontStyles: true,
+      cloudServices_tokenUrl:'YOUR_TOKEN_URL',
+      // cloudServices_tokenUrl: 'https://example.com/cs-token-endpoint',
+      // cloudServices_uploadUrl: 'https://your-organization-id.cke-cs.com/easyimage/upload/',
 
-    const s1 = this.renderer2.createElement('script');
-    s1.type = 'text/javascript';
-    s1.text = `
-    {
-      CKEDITOR.replace('editor2', {
-        extraPlugins: 'mathjax',
-        mathJaxLib: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML',
-        height: 320
-      });
-    }
-    `;
-    this.renderer2.appendChild(this._document.body, s1);
+    //   cloudServices: {
+    //     tokenUrl: 'http://localhost:4200/',
+    //     uploadUrl: 'http://localhost:3000/easyimage/upload/'
+    // },
+    
+      on: {
+
+        instanceReady: function (evt) {
+          var rule = {
+            attributeNames: [
+              [(/^data-cke-pa-on/), 'on'],
+            ],
+          };
+
+          evt.editor.dataProcessor.dataFilter.addRules(rule, { applyToAll: true });
+
+        }
+      }
+    };
 
     this.addTestSeriesForm = this.fb.group({
       instituteName: ['', [Validators.required, Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*')]],
@@ -117,7 +120,7 @@ export class AddTestSeriesComponent implements OnInit, OnDestroy {
       examYear: ['',Validators.required],
       testSeries: this.fb.group({
         testSeriesName: ['',Validators.required],
-        testSeriesImage: [''],
+        testSeriesImage: ['',Validators.required],
         testSeriesPrice: ['',Validators.required],
         noOfTests: ['',Validators.required],
         noOfFreeTest: ['',Validators.required],
@@ -131,9 +134,10 @@ export class AddTestSeriesComponent implements OnInit, OnDestroy {
         language: ['',Validators.required],
         status: ['',Validators.required],  
         todayDate :  [this.datepipe.transform(new Date(), 'yyyy-MM-dd')],      
-        startDate: [null, Validators.required],
-        endDate: [null,Validators.required ]      
-      }, {validator: Validators.compose([
+        startDate: [null,Validators.required],
+        endDate: [null,Validators.required]      
+      }
+      , {validator: Validators.compose([
         compareStartDateValidator('todayDate', 'startDate'),
         compareEndDateValidator('startDate', 'endDate')
       ]) }
@@ -141,6 +145,15 @@ export class AddTestSeriesComponent implements OnInit, OnDestroy {
     })
   }
 
+  onCkeChange($event: any): void {
+    console.log("onChange",$event);
+    
+  }
+
+
+  get description(){
+    return this.addTestSeriesForm.get(['testSeries','description']).value;
+  }
 
   selectedInstitute(event) {
     this.instituteName = event.target.value;
@@ -186,6 +199,7 @@ export class AddTestSeriesComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     console.log(this.addTestSeriesForm.value);
+    console.log("discription value",this.description.replace(/<[^>]*>/g, ''))
   }
 
   ngOnDestroy(){}

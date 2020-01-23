@@ -96,30 +96,34 @@
 
                     <div class="col-lg-4 col-xl-3 pr-5 mr-5">
                         <label>Start Date</label>
-                        <input type="date" [min]="today" formControlName="startDate" class="form-control" placeholder="Start Date">
-                        <div *ngIf="(startDate.invalid && (startDate.dirty || startDate.touched))" class="alert alert-danger" >
+                        <input type="date" [min]="today" formControlName="startDate" class="form-control"
+                            placeholder="Start Date">
+                        <div *ngIf="(startDate.invalid && (startDate.dirty || startDate.touched))"
+                            class="alert alert-danger">
                             Please enter valid Date.
                         </div>
 
                     </div>
-                    
+
                     <div class="col-lg-4 col-xl-3 pr-5 mr-5">
                         <label>End Date</label>
-                        <input type="date" [min]="today" formControlName="endDate" class="form-control" placeholder="End Date">
-                        <div *ngIf="!(endDate.invalid && (endDate.dirty || endDate.touched))" >
-                            <div class="alert alert-danger" style="display: inline-block;" *ngIf="startDate.value > endDate.value">
+                        <input type="date" [min]="today" formControlName="endDate" class="form-control"
+                            placeholder="End Date">
+                        <div *ngIf="!(endDate.invalid && (endDate.dirty || endDate.touched))">
+                            <div class="alert alert-danger" style="display: inline-block;"
+                                *ngIf="startDate.value > endDate.value">
                                 end date must be greater than start date.
                             </div>
-                            
+
                         </div>
-                        <div *ngIf="(endDate.invalid && (endDate.dirty || endDate.touched))" class="alert alert-danger" >
+                        <div *ngIf="(endDate.invalid && (endDate.dirty || endDate.touched))" class="alert alert-danger">
                             Please enter valid Date.
                         </div>
-                        
+
                     </div>
-                    
-                        
-                   
+
+
+
 
                     <div class="col-lg-4 col-xl-3 pr-5 mr-5">
                         <label>Number of Tests</label>
@@ -148,8 +152,9 @@
                 <div class="row  pt-2 mb-5">
                     <div class="col pr-5 mr-5">
                         <label>Description</label>
-                        <textarea class="form-control" id="editor1" formControlName="description"
-                            data-sample-short></textarea>
+                        <ckeditor type="text" tagName="textarea" formControlName="description" 
+                            [config]="ckeConfig" debounce="500" (change)="onCkeChange($event)" data-sample-short>
+                        </ckeditor>
                     </div>
                 </div>
                 <div class="row  pt-2 mb-5">
@@ -163,8 +168,9 @@
                 <div class="row  pt-2 mb-5">
                     <div class="col pr-5 mr-5">
                         <label>Time Table</label>
-                        <textarea class="form-control" id="editor2" formControlName="timeTable"
-                            data-sample-short></textarea>
+                            <ckeditor type="text" tagName="textarea" formControlName="timeTable" 
+                            [config]="ckeConfig" (change)="onCkeChange($event)" debounce="500" >
+                        </ckeditor>
                     </div>
                 </div>
                 <div class="row  pt-2 mb-5">

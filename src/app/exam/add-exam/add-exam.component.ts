@@ -39,51 +39,42 @@ export class AddExamComponent implements OnInit, OnDestroy {
   dropdownYear = [];
   dropdownSettings = {};
   form: FormGroup;
+  ckeConfig: any;
 
 
   constructor(public examService: ExamService, private location: Location, public toastr: ToastrManager, private _route: ActivatedRoute, private router: Router, private renderer2: Renderer2, @Inject(DOCUMENT) private _document, private el: ElementRef) { }
 
   ngOnInit() {
 
-    const s = this.renderer2.createElement('script');
-    s.type = 'text/javascript';
-    s.text = `
-    {
-      CKEDITOR.replace('editor1', {
-        extraPlugins: 'mathjax',
-        mathJaxLib: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML',
-        height: 320,
-        validationRules: {required: true}
-      });
-    }
-    `;
-    this.renderer2.appendChild(this._document.body, s);
+    this.ckeConfig = {
+      allowedContent: false,
+      extraPlugins: 'divarea,mathjax,easyimage',
+      mathJaxLib: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML',
+      forcePasteAsPlainText: true,
+      pasteFromWordRemoveFontStyles: true,
 
-    const s1 = this.renderer2.createElement('script');
-    s1.type = 'text/javascript';
-    s1.text = `
-    {
-      CKEDITOR.replace('editor2', {
-        extraPlugins: 'mathjax',
-        mathJaxLib: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML',
-        height: 320
-      });
-    }
-    `;
-    this.renderer2.appendChild(this._document.body, s1);
+      cloudServices_tokenUrl:'YOUR_TOKEN_URL',
+      //cloudServices_uploadUrl:'YOUR_UPLOAD_URL',
 
-    const s2 = this.renderer2.createElement('script');
-    s2.type = 'text/javascript';
-    s2.text = `
-    {
-      CKEDITOR.replace('editor3', {
-        extraPlugins: 'mathjax',
-        mathJaxLib: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML',
-        height: 320
-      });
-    }
-    `;
-    this.renderer2.appendChild(this._document.body, s2);
+    //   cloudServices: {
+    //     tokenUrl: 'http://localhost:4200/',
+    //     uploadUrl: 'http://localhost:3000/easyimage/upload/'
+    // },
+    
+      on: {
+
+        instanceReady: function (evt) {
+          var rule = {
+            attributeNames: [
+              [(/^data-cke-pa-on/), 'on'],
+            ],
+          };
+
+          evt.editor.dataProcessor.dataFilter.addRules(rule, { applyToAll: true });
+
+        }
+      }
+    };
 
     this.phases = [1,2,3];
 
@@ -102,6 +93,11 @@ export class AddExamComponent implements OnInit, OnDestroy {
       allowSearchFilter: false
     };
 
+  }
+
+  onCkeChange($event: any): void {
+    //console.log("onChange",$event);
+    
   }
 
   onYearSelect(year: any) {
