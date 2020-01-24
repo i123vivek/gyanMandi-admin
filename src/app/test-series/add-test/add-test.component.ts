@@ -97,10 +97,42 @@ export class AddTestComponent implements OnInit, OnDestroy {
   public min: any;
   public max: any;
   selectedStartDateAndTime: any;
+  ckeConfig: any;
 
   constructor(private fb: FormBuilder, public toastr: ToastrManager, private location: Location, private _route: ActivatedRoute, private router: Router, private renderer2: Renderer2, @Inject(DOCUMENT) private _document) { }
 
   ngOnInit() {
+
+    this.ckeConfig = {
+      allowedContent: false,
+      extraPlugins: 'divarea,mathjax,easyimage',
+      mathJaxLib: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML',
+      forcePasteAsPlainText: true,
+      pasteFromWordRemoveFontStyles: true,
+      cloudServices_tokenUrl:'YOUR_TOKEN_URL',
+      // cloudServices_tokenUrl: 'https://example.com/cs-token-endpoint',
+      // cloudServices_uploadUrl: 'https://your-organization-id.cke-cs.com/easyimage/upload/',
+
+    //   cloudServices: {
+    //     tokenUrl: 'http://localhost:4200/',
+    //     uploadUrl: 'http://localhost:3000/easyimage/upload/'
+    // },
+    
+      on: {
+
+        instanceReady: function (evt) {
+          var rule = {
+            attributeNames: [
+              [(/^data-cke-pa-on/), 'on'],
+            ],
+          };
+
+          evt.editor.dataProcessor.dataFilter.addRules(rule, { applyToAll: true });
+
+        }
+      }
+    };
+
     this.addTestForm = this.fb.group({
       instituteName: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
       examName: [''],
@@ -141,8 +173,17 @@ export class AddTestComponent implements OnInit, OnDestroy {
     })
   }
 
+  onCkeChange($event: any): void {
+    console.log("onChange",$event);
+    
+  }
+
   get startDateAndTime(){
     return this.addTestForm.get('startDateAndTime');
+  }
+
+  get showUsefulData(){
+    return this.addTestForm.get('showUsefulData');
   }
 
   selectedInstitute(event) {

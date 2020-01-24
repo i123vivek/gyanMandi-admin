@@ -164,6 +164,92 @@
                     <input type="text" formControlName="totalMarks" class="form-control" placeholder="Enter Total Marks">
                 </div>
             </div>
+            <div class="row pt-2 mb-5">
+                <div class=" col-lg-4 col-xl-3 pr-5 mr-5">
+                    <label>Resume Test</label>
+                    <select class="form-control" formControlName="resumeTest"
+                        [ngClass]="{ 'is-invalid': submitted }">
+                        <option value="" disabled selected hidden>Select Option</option>
+                        <option *ngFor="let option of ['Yes','No']" value="{{option}}">
+                            {{option}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row  pt-2 mb-5">
+                <div class="col pr-5 mr-5">
+                    <label>Instructions</label>
+                    <ckeditor type="text" tagName="textarea" formControlName="instruction" 
+                        [config]="ckeConfig" debounce="500" (change)="onCkeChange($event)" data-sample-short>
+                    </ckeditor>
+                </div>
+            </div>
+            <div class="row  pt-2 mb-5">
+                <div class="col-md-6 pr-5 mr-5">
+                    <label><i class="fa fa-cloud-upload" style="font-size:24px;color: rgb(78, 186, 248);"></i>
+                        <span> Attach Pdf </span></label>
+                    <input type="file" class="form-control-file" formControlName="instructionPdf" id="instruction"
+                        multiple>
+                </div>
+            </div>
+
+            <div class="row  pt-2 mb-5">
+                <div class="col pr-5 mr-5">
+                    <label>General Instructions</label>
+                    <ckeditor type="text" tagName="textarea" formControlName="generalInstruction" 
+                        [config]="ckeConfig" debounce="500" (change)="onCkeChange($event)" data-sample-short>
+                    </ckeditor>
+                </div>
+            </div>
+            <div class="row  pt-2 mb-5">
+                <div class="col-md-6 pr-5 mr-5">
+                    <label><i class="fa fa-cloud-upload" style="font-size:24px;color: rgb(78, 186, 248);"></i>
+                        <span> Attach Pdf </span></label>
+                    <input type="file" class="form-control-file" formControlName="generalInstructionPdf" id="generalInstruction"
+                        multiple>
+                </div>
+            </div>
+            <div class="row  pt-2 mb-5">
+                <div class=" col-lg-4 col-xl-3 pr-5 mr-5">
+                    <label>Show Useful Data</label>
+                    <select class="form-control" formControlName="showUsefulData"
+                        [ngClass]="{ 'is-invalid': submitted }">
+                        <option value="" disabled selected hidden>Select Option</option>
+                        <option *ngFor="let option of ['Yes','No']" value="{{option}}">
+                            {{option}}</option>
+                    </select>
+                </div>
+                <div class=" col-lg-4 col-xl-3 pr-5 mr-5">
+                    <label>Language</label>
+                    <select class="form-control" formControlName="language">
+                        <option value="" disabled selected hidden>Select Language</option>
+                        <option *ngFor="let j of ['English','Hindi','Gujarati']" value="{{j}}">{{j}}</option>
+                    </select>
+                </div>
+
+                <div class=" col-lg-4 col-xl-3 pr-5 mr-5">
+                    <label>Status</label>
+                    <select class="form-control" formControlName="status">
+                        <option value="" disabled selected hidden>Select Status</option>
+                        <option *ngFor="let y of ['Active','Inactive']" value="{{y}}">{{y}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row  pt-2 mb-5" *ngIf="showUsefulData.value == 'Yes'">
+                <div class="col pr-5 mr-5">
+                    <label>Useful Data</label>
+                    <ckeditor type="text" tagName="textarea" formControlName="usefulData" 
+                        [config]="ckeConfig" debounce="500" (change)="onCkeChange($event)" data-sample-short>
+                    </ckeditor>
+                </div>
+            </div>
+            <div class="row  pt-2 mb-5" *ngIf="showUsefulData.value == 'Yes'">
+                <div class="col-md-6 pr-5 mr-5">
+                    <label><i class="fa fa-cloud-upload" style="font-size:24px;color: rgb(78, 186, 248);"></i>
+                        <span> Attach Pdf </span></label>
+                    <input type="file" class="form-control-file" formControlName="usefulDataPdf" id="usefulData"
+                        multiple>
+                </div>
+            </div>
 
 
 
