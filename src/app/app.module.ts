@@ -20,6 +20,7 @@ import { ExamService } from './exam.service';
 import { ExamModule } from './exam/exam.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { TestSeriesModule } from './test-series/test-series.module';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 
 @NgModule({
@@ -37,6 +38,8 @@ import { TestSeriesModule } from './test-series/test-series.module';
     FormsModule,
     ExamModule,
     TestSeriesModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
     NgbModule,
     ToastrModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot()

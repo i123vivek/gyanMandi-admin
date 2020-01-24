@@ -15,6 +15,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FileUploadModule } from 'ng2-file-upload';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 
 
@@ -29,6 +30,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     ReactiveFormsModule,
     NgxPaginationModule,
     NgbModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
     FileUploadModule,
     ToastrModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot()
