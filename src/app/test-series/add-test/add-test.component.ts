@@ -17,64 +17,64 @@ import { Location } from "@angular/common";
 })
 export class AddTestComponent implements OnInit, OnDestroy {
 
-  public testList= [
+  public testList = [
     {
-      InstituteName : "Akash",
-      examList:[
+      InstituteName: "Akash",
+      examList: [
         {
-          examName:"IITJEE",
-          testSeriesList:[
+          examName: "IITJEE",
+          testSeriesList: [
             {
               year: 2020,
-              testSeriesName: ["testSeries1","testSeries2","testSeries3"]
+              testSeriesName: ["testSeries1", "testSeries2", "testSeries3"]
             },
             {
               year: 2021,
-              testSeriesName: ["testSeries4","testSeries5","testSeries6"]
+              testSeriesName: ["testSeries4", "testSeries5", "testSeries6"]
             }
           ]
         },
         {
-          examName:"GATE",
-          testSeriesList:[
+          examName: "GATE",
+          testSeriesList: [
             {
               year: 2022,
-              testSeriesName: ["tSeries1","tSeries2","tSeries3"]
+              testSeriesName: ["tSeries1", "tSeries2", "tSeries3"]
             },
             {
               year: 2023,
-              testSeriesName: ["tSeries4","tSeries5","tSeries6"]
+              testSeriesName: ["tSeries4", "tSeries5", "tSeries6"]
             }
           ]
         }
       ]
     },
     {
-      InstituteName : "Prerna",
-      examList:[
+      InstituteName: "Prerna",
+      examList: [
         {
-          examName:"MAT",
-          testSeriesList:[
+          examName: "MAT",
+          testSeriesList: [
             {
               year: 2020,
-              testSeriesName: ["testSeries1","testSeries2","testSeries3"]
+              testSeriesName: ["testSeries1", "testSeries2", "testSeries3"]
             },
             {
               year: 2021,
-              testSeriesName: ["testSeries4","testSeries5","testSeries6"]
+              testSeriesName: ["testSeries4", "testSeries5", "testSeries6"]
             }
           ]
         },
         {
-          examName:"CAT",
-          testSeriesList:[
+          examName: "CAT",
+          testSeriesList: [
             {
               year: 2022,
-              testSeriesName: ["tSeries1","tSeries2","tSeries3"]
+              testSeriesName: ["tSeries1", "tSeries2", "tSeries3"]
             },
             {
               year: 2023,
-              testSeriesName: ["tSeries4","tSeries5","tSeries6"]
+              testSeriesName: ["tSeries4", "tSeries5", "tSeries6"]
             }
           ]
         }
@@ -98,6 +98,7 @@ export class AddTestComponent implements OnInit, OnDestroy {
   public max: any;
   selectedStartDateAndTime: any;
   ckeConfig: any;
+  sections: FormArray;
 
   constructor(private fb: FormBuilder, public toastr: ToastrManager, private location: Location, private _route: ActivatedRoute, private router: Router, private renderer2: Renderer2, @Inject(DOCUMENT) private _document) { }
 
@@ -109,15 +110,15 @@ export class AddTestComponent implements OnInit, OnDestroy {
       mathJaxLib: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML',
       forcePasteAsPlainText: true,
       pasteFromWordRemoveFontStyles: true,
-      cloudServices_tokenUrl:'YOUR_TOKEN_URL',
+      cloudServices_tokenUrl: 'YOUR_TOKEN_URL',
       // cloudServices_tokenUrl: 'https://example.com/cs-token-endpoint',
       // cloudServices_uploadUrl: 'https://your-organization-id.cke-cs.com/easyimage/upload/',
 
-    //   cloudServices: {
-    //     tokenUrl: 'http://localhost:4200/',
-    //     uploadUrl: 'http://localhost:3000/easyimage/upload/'
-    // },
-    
+      //   cloudServices: {
+      //     tokenUrl: 'http://localhost:4200/',
+      //     uploadUrl: 'http://localhost:3000/easyimage/upload/'
+      // },
+
       on: {
 
         instanceReady: function (evt) {
@@ -139,50 +140,134 @@ export class AddTestComponent implements OnInit, OnDestroy {
       year: [''],
       testSeries: [''],
       //test: this.fb.group({
-        testName: [''],
-        positionOfTest: [''],
-        paymentMode: [''],
-        testType: [''],
-        liveTest: [''],
-        durationOfTest: [''],
-        startDateAndTime:[''],
-        endDateAndTime:[''],
-        syllabus:[''],
-        noOfQuestion:[''],
-        totalMarks: [''],
-        resumeTest: [''],
-        instruction: [''],
-        instructionPdf:[''],
-        generalInstruction:[''],
-        generalInstructionPdf:[''],
-        language: [''],
-        status:[''],
-        sectionOfTest:[''],
-        timeConstraint:[''],
-        sectionNameArray: this.fb.array([
-          this.fb.control('')
-        ]),
-        durationSectionArray: this.fb.array([
-          this.fb.control('')
-        ]),
-        showUsefulData:[''],
-        usefulData:[''],
-        usefulDataPdf:['']
+      testName: [''],
+      positionOfTest: [''],
+      paidTest: [''],
+      testType: [''],
+      liveTest: [''],
+      durationOfTest: [''],
+      startDateAndTime: [''],
+      endDateAndTime: [''],
+      syllabus: [''],
+      noOfQuestion: [''],
+      totalMarks: [''],
+      resumeTest: [''],
+      instruction: [''],
+      instructionPdf: [''],
+      generalInstruction: [''],
+      generalInstructionPdf: [''],
+      language: [''],
+      status: [''],
+      sectionOfTest: ['No'],
+      timeConstraint: ['No'],
+      sectionArray: new FormArray([]),
+      // sectionNameArray: this.fb.array([
+      //   //this.fb.control('')
+      // ]),
+      // durationSectionArray: this.fb.array([
+      //   this.fb.control('')
+      // ]),
+      showUsefulData: [''],
+      usefulData: [''],
+      usefulDataPdf: ['']
 
       //})
     })
   }
 
   onCkeChange($event: any): void {
-    console.log("onChange",$event);
-    
+    console.log("onChange", $event);
+
   }
 
-  get startDateAndTime(){
+  //   createSection(): FormGroup {
+  //     return this.fb.group({
+  //       sectionName: '',
+  //       sectionDuration: ''
+  //     });
+  //  }
+
+  get f() { return this.addTestForm.controls; }
+  get t() { return this.f.sectionArray as FormArray; }
+
+  onSelectedSectionOption(e) {
+    const selectedSectionOption = e.target.value;
+    console.log("selecte option is:", selectedSectionOption)
+    this.t.clear();
+    if (selectedSectionOption == 'Yes' && this.timeConstraint.value == 'No') {
+      for (let i = 0; i < 2; i++) {
+        this.t.push(this.fb.group({
+          sectionName: ['']
+        }))
+      }
+    } else if (selectedSectionOption == 'Yes' && this.timeConstraint.value == 'Yes') {
+      for (let i = 0; i < 2; i++) {
+        this.t.push(this.fb.group({
+          sectionName: [''],
+          sectionDuration: ['']
+        }))
+      }
+    } else{
+      this.addTestForm.patchValue({
+        sectionOfTest: ['No'],
+        timeConstraint: ['No']
+      })
+    }
+  }
+
+  onSelectedDurationOption(e) {
+    const selectedDurationOption = e.target.value;
+    console.log("selecte option is:", selectedDurationOption)
+    this.t.clear();
+    if (selectedDurationOption == 'Yes' && this.sectionOfTest.value == 'Yes') {
+      for (let i = 0; i < 2; i++) {
+        this.t.push(this.fb.group({
+          sectionName: [''],
+          sectionDuration: ['']
+        }))
+      }
+    } else if(selectedDurationOption == 'No' && this.sectionOfTest.value == 'Yes'){
+      for (let i = 0; i < 2; i++) {
+        this.t.push(this.fb.group({
+          sectionName: ['']
+        }))
+      }
+    } else{
+      this.addTestForm.patchValue({
+        sectionOfTest: ['No'],
+        timeConstraint: ['No']
+      })
+    }
+  }
+
+  addSection(): void {
+    // this.sections = this.f.sectionArray as FormArray;
+    // this.sections.push(this.createAddress());
+    if (this.timeConstraint.value == 'Yes' && this.sectionOfTest.value == 'Yes') {
+      this.t.push(this.fb.group({
+        sectionName: [''],
+        sectionDuration: ['']
+      }))
+    } else if(this.timeConstraint.value == 'No' && this.sectionOfTest.value == 'Yes') {
+      this.t.push(this.fb.group({
+        sectionName: ['']
+      }))
+    }
+  }
+
+  get startDateAndTime() {
     return this.addTestForm.get('startDateAndTime');
   }
 
-  get showUsefulData(){
+  get sectionOfTest() {
+    return this.addTestForm.get('sectionOfTest');
+  }
+
+  get timeConstraint() {
+    return this.addTestForm.get('timeConstraint');
+  }
+
+  get showUsefulData() {
     return this.addTestForm.get('showUsefulData');
   }
 
@@ -193,45 +278,46 @@ export class AddTestComponent implements OnInit, OnDestroy {
     for (let x of this.testList) {
       if (x.InstituteName == this.instituteName) {
         this.examList.push(...x.examList);
-        console.log("examlist is :",this.examList);
+        console.log("examlist is :", this.examList);
       }
     }
   }
 
-  selectedExam(event){
+  selectedExam(event) {
     this.selectedExamName = event.target.value;
-    console.log("selected exam name is",this.selectedExamName);
+    console.log("selected exam name is", this.selectedExamName);
     this.testSeriesList = [];
 
-    for(let y of this.examList){
-      if(y.examName == this.selectedExamName){
+    for (let y of this.examList) {
+      if (y.examName == this.selectedExamName) {
         this.testSeriesList.push(...y.testSeriesList);
         console.log("test series list of selected exam is", this.testSeriesList);
       }
     }
   }
 
-  selectedYear(event){
+  selectedYear(event) {
+    console.log("selected exam name is", this.selectedYearData);
     this.selectedYearData = event.target.value;
-    console.log("selected exam name is",this.selectedYearData);
+    // console.log("selected exam name is", this.selectedYearData);
     this.testSeriesNameList = [];
 
-    for(let y of this.testSeriesList){
-      if(y.year == this.selectedYearData){
+    for (let y of this.testSeriesList) {
+      if (y.year == this.selectedYearData) {
         this.testSeriesNameList.push(...y.testSeriesName);
         console.log("test series Name list of selected exam is", this.testSeriesNameList);
       }
     }
-    this.setMinAndMaxStartDate(this.selectedYearData,this.currentYear);
+    this.setMinAndMaxStartDate(this.selectedYearData, this.currentYear);
   }
 
-  setMinAndMaxStartDate(selectedYearData,currentYear){
-    if(selectedYearData == currentYear){
-      this.min = new Date(currentYear,this.month,this.day);
-      this.max = new Date(currentYear,11,31) ;
-    } else if(selectedYearData > currentYear){
-      this.min = new Date(selectedYearData,0,1);
-      this.max = new Date(selectedYearData,11,31) ;
+  setMinAndMaxStartDate(selectedYearData, currentYear) {
+    if (selectedYearData == currentYear) {
+      this.min = new Date(currentYear, this.month, this.day);
+      this.max = new Date(currentYear, 11, 31);
+    } else if (selectedYearData > currentYear) {
+      this.min = new Date(selectedYearData, 0, 1);
+      this.max = new Date(selectedYearData, 11, 31);
     }
 
   }
@@ -245,7 +331,7 @@ export class AddTestComponent implements OnInit, OnDestroy {
     this.location.back();
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
   }
 
 }

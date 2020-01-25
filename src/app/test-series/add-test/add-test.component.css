@@ -25,6 +25,10 @@
     background-color: rgb(51, 174, 245);
     color: white;
 }
+
+.disabled {
+    cursor: not-allowed;
+  }
   
 .navbar {
     padding: 1px 16px;

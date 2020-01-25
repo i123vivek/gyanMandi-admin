@@ -91,57 +91,53 @@
                     <select class="form-control" formControlName="positionOfTest"
                         [ngClass]="{ 'is-invalid': submitted }">
                         <option value="" disabled selected hidden>Position Of Test</option>
-                        <option *ngFor="let position of ['position1','position2','position3']" value="{{position}}">
+                        <option *ngFor="let position of [1,2,3,4]" value="{{position}}">
                             {{position}}</option>
                     </select>
                 </div>
             </div>
             <div class="row pt-2 mb-5">
                 <div class=" col-lg-4 col-xl-3 pr-5 mr-5">
-                    <label>Payment Mode</label>
-                    <select class="form-control" formControlName="paymentMode" [ngClass]="{ 'is-invalid': submitted }">
-                        <option value="" disabled selected hidden>Select Payment Mode</option>
-                        <option *ngFor="let payment of ['netbanking','paytm','googlepay']" value="{{payment}}">
-                            {{payment}}</option>
+                    <label>Paid Test</label>
+                    <select class="form-control" formControlName="paidTest" [ngClass]="{ 'is-invalid': submitted }">
+                        <option value="" disabled selected hidden>Select Option</option>
+                        <option *ngFor="let option of ['Yes','No']" value="{{option}}">
+                            {{option}}</option>
                     </select>
                 </div>
                 <div class=" col-lg-4 col-xl-3 pr-5 mr-5">
                     <label>Test Type</label>
                     <select class="form-control" formControlName="testType" [ngClass]="{ 'is-invalid': submitted }">
                         <option value="" disabled selected hidden>Select Test Type</option>
-                        <option *ngFor="let testType of ['Objective','Subjective']" value="{{testType}}">{{testType}}
+                        <option *ngFor="let testType of ['Mock Test','Subject Test','Multiple Test']" value="{{testType}}">{{testType}}
                         </option>
                     </select>
                 </div>
                 <div class=" col-lg-4 col-xl-3 pr-5 mr-5">
                     <label>Live Test</label>
                     <select class="form-control" formControlName="liveTest" [ngClass]="{ 'is-invalid': submitted }">
-                        <option value="" disabled selected hidden>No. Of Live Test</option>
-                        <option *ngFor="let liveTest of [5,7,10]" value="{{liveTest}}">{{liveTest}}</option>
+                        <option value="" disabled selected hidden>Select Option</option>
+                        <option *ngFor="let Option of ['Yes','No']" value="{{Option}}">{{Option}}</option>
                     </select>
                 </div>
             </div>
             <div class="row pt-2 mb-5">
                 <div class=" col-lg-4 col-xl-3 pr-5 mr-5">
                     <label>Duration of Test</label>
-                    <select class="form-control" formControlName="durationOfTest"
-                        [ngClass]="{ 'is-invalid': submitted }">
-                        <option value="" disabled selected hidden>Duration Of Test</option>
-                        <option *ngFor="let testDuration of ['3Hrs','6Hrs','9Hrs']" value="{{testDuration}}">
-                            {{testDuration}}</option>
-                    </select>
+                    <input type="time" formControlName="durationOfTest" class="form-control"  data-format="HH:mm" data-template="HH : mm">
                 </div>
-                <div class=" col-lg-4 col-xl-3 pr-5 mr-5" *ngIf="selectedYearData >= currentYear">
+
+                <div class=" col-lg-4 col-xl-3 pr-5 mr-5"  >
                     <label>Start Date & Time</label>
-                    <input class="form-control" formControlName="startDateAndTime"  [min]="min" [max]="max" placeholder="Start Date & Time"
+                    <input  class="form-control" formControlName="startDateAndTime"  [min]="min" [max]="max" placeholder="Start Date & Time"
                         [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
-                    <owl-date-time [startAt]="startAt" #dt1></owl-date-time>
+                    <owl-date-time [disabled]="currentYear > selectedYearData || selectedYearData == '' || selectedYearData == undefined " [startAt]="startAt" #dt1></owl-date-time>
                 </div>
-                <div class=" col-lg-4 col-xl-3 pr-5 mr-5" *ngIf="selectedYearData >= currentYear && startDateAndTime.value !== '' ">
+                <div class=" col-lg-4 col-xl-3 pr-5 mr-5" >
                     <label>End Date & Time</label>
                     <input class="form-control"  formControlName="endDateAndTime" [min]="startDateAndTime.value" [max]="max" placeholder="End Date & Time"
-                        [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
-                    <owl-date-time [startAt]="startAt" #dt1></owl-date-time>
+                        [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2">
+                    <owl-date-time [disabled]="currentYear > selectedYearData || selectedYearData == '' || selectedYearData == undefined || startDateAndTime.value == ''" [startAt]="startAt" #dt2></owl-date-time>
                 </div>
             </div>
 
@@ -174,7 +170,66 @@
                             {{option}}</option>
                     </select>
                 </div>
+                <div class=" col-lg-4 col-xl-3 pr-5 mr-5">
+                    <label>Section Of Test</label>
+                    <select class="form-control" (change)="onSelectedSectionOption($event)" formControlName="sectionOfTest"
+                        [ngClass]="{ 'is-invalid': submitted }">
+                        <option value="" disabled selected hidden>Select Option</option>
+                        <option *ngFor="let option of ['Yes','No']" value="{{option}}">
+                            {{option}}</option>
+                    </select>
+                </div>
+                <div class=" col-lg-4 col-xl-3 pr-5 mr-5" *ngIf = "sectionOfTest.value == 'Yes'">
+                    <label>Time Constraint</label>
+                    <select class="form-control" (change)="onSelectedDurationOption($event)" formControlName="timeConstraint"
+                        [ngClass]="{ 'is-invalid': submitted }">
+                        <option value="" disabled selected hidden>Select Option</option>
+                        <option *ngFor="let option of ['Yes','No']" value="{{option}}">
+                            {{option}}</option>
+                    </select>
+                </div>
             </div>
+
+            <div formArrayName="sectionArray" *ngIf = "sectionOfTest.value == 'Yes' && timeConstraint.value == 'No'">
+                <div *ngFor="let section of t.controls; let i = index" [formGroupName]="i">
+                    <div [formGroup]="section" class="row pt-2 mb-5">
+                        <div class="form-group col-lg-4 col-xl-3 pr-5 mr-5">
+                            <label>Section {{i+1}} Name</label>
+                            <input type="text" formControlName="sectionName" class="form-control"
+                                placeholder="Enter Section name">
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-info mb-5" (click)="addSection()">Add Section</button>
+
+            </div>
+
+            <div formArrayName="sectionArray" *ngIf = "sectionOfTest.value == 'Yes' && timeConstraint.value == 'Yes'">
+                <div *ngFor="let section of t.controls; let i = index" [formGroupName]="i">
+                    <div [formGroup]="section" class="row pt-2 mb-5">
+                        <div class="form-group col-lg-4 col-xl-3 pr-5 mr-5">
+                            <label>Section {{i+1}} Name</label>
+                            <input type="text" formControlName="sectionName" class="form-control"
+                                placeholder="Enter Section name">
+                        </div>
+                        <div class="form-group col-lg-4 col-xl-3 pr-5 mr-5">
+                            <label>Duration Section {{i+1}} in HH:MM</label>
+                            <input type="time" formControlName="sectionDuration" class="form-control" data-format="HH:mm" data-template="HH : mm"
+                                placeholder="Enter Section Duration">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-info mb-5" (click)="addSection()">Add Section</button>
+
+
+            </div>
+
+
+
+
+
+
             <div class="row  pt-2 mb-5">
                 <div class="col pr-5 mr-5">
                     <label>Instructions</label>
