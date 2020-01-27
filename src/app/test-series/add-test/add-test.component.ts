@@ -80,6 +80,21 @@ export class AddTestComponent implements OnInit, OnDestroy {
         }
       ]
     }
+  ];
+
+  public syllabusList = [
+    {
+      syllabusName: "syllabus1",
+      topicArray: ["topic1","topic2"]
+    },
+    {
+      syllabusName: "syllabus2",
+      topicArray: ["topic3","topic4"]
+    },
+    {
+      syllabusName: "syllabus3",
+      topicArray: ["topic5","topic6"]
+    }
   ]
   addTestForm: FormGroup;
   instituteName: any;
@@ -99,6 +114,12 @@ export class AddTestComponent implements OnInit, OnDestroy {
   selectedStartDateAndTime: any;
   ckeConfig: any;
   sections: FormArray;
+
+  dropdownSyllabus = [];
+  dropdownLanguage = [];
+  dropdownSettings = {};
+  dropdownSettings1: {};
+  dropdownTopic= [];
 
   constructor(private fb: FormBuilder, public toastr: ToastrManager, private location: Location, private _route: ActivatedRoute, private router: Router, private renderer2: Renderer2, @Inject(DOCUMENT) private _document) { }
 
@@ -134,6 +155,28 @@ export class AddTestComponent implements OnInit, OnDestroy {
       }
     };
 
+    for(let x of this.syllabusList){
+      this.dropdownSyllabus.push(x.syllabusName);
+    }
+
+    this.dropdownLanguage = ["Hindi", "English", "Gujarati", "French"]
+
+    this.dropdownSettings = {
+      singleSelection: false,
+      selectAllLanguage: 'Select All',
+      unSelectAllLanguage: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: false
+    };
+
+    this.dropdownSettings1 = {
+      singleSelection: false,
+      selectAllSyllabus: 'Select All',
+      unSelectAllSyllabus: 'UnSelect All',
+      itemsShowLimit: 2,
+      allowSearchFilter: false
+    };
+
     this.addTestForm = this.fb.group({
       instituteName: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
       examName: [''],
@@ -149,6 +192,7 @@ export class AddTestComponent implements OnInit, OnDestroy {
       startDateAndTime: [''],
       endDateAndTime: [''],
       syllabus: [''],
+      topic:[''],
       noOfQuestion: [''],
       totalMarks: [''],
       resumeTest: [''],
@@ -161,18 +205,33 @@ export class AddTestComponent implements OnInit, OnDestroy {
       sectionOfTest: ['No'],
       timeConstraint: ['No'],
       sectionArray: new FormArray([]),
-      // sectionNameArray: this.fb.array([
-      //   //this.fb.control('')
-      // ]),
-      // durationSectionArray: this.fb.array([
-      //   this.fb.control('')
-      // ]),
+      
       showUsefulData: [''],
       usefulData: [''],
       usefulDataPdf: ['']
 
       //})
     })
+  }
+
+  onLanguageSelect(Language: any) {
+    console.log(Language);
+  }
+  onSelectAll(Languages: any) {
+    console.log(Languages);
+  }
+
+  onSyllabuslSelect(Syllabus: any) {
+    console.log("fggfffgfg",Syllabus);
+    for(let x of this.syllabusList){
+      if(x.syllabusName == Syllabus){
+        this.dropdownTopic.push(...x.topicArray)
+      } 
+    }
+    console.log("topic list",this.dropdownTopic)
+  }
+  onSelectAllSyllabus(Syllabus: any) {
+    console.log("kllklklklkl",Syllabus);
   }
 
   onCkeChange($event: any): void {
@@ -253,6 +312,10 @@ export class AddTestComponent implements OnInit, OnDestroy {
         sectionName: ['']
       }))
     }
+  }
+
+  deleteSection(index) {
+    this.t.removeAt(index);
   }
 
   get startDateAndTime() {

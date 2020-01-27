@@ -73,10 +73,10 @@
 
                 <div class="form-group col-lg-4 col-xl-3 pr-5 mr-5">
                     <label>Number of phases</label>
-                    <select class="form-control" id="numberOfPhase" [(ngModel)]="phaseNumber" name="phaseNumber"
+                    <select class="form-control" [(ngModel)]="phaseNumber" name="phaseNumber" [ngClass]="{ 'is-invalid': submitted }"
                         required>
-                        <option value="" disabled selected hidden>Choose phase</option>
-                        <option *ngFor="let phase of phases">{{phase}}</option>
+                        <option value="" disabled selected hidden > Choose Phase</option>
+                        <option *ngFor="let phase of phases" value="{{phase}}" >{{phase}}</option>
                     </select>
                 </div>
             </div>
@@ -178,8 +178,8 @@
                     <label for="Status">Status</label>
                     <select class="form-control" id="selectStatus" [(ngModel)]="status" name="status" required>
                         <option value="" disabled selected hidden>Select status</option>
-                        <option>active</option>
-                        <option>Inactive</option>
+                        <option value = "0">active</option>
+                        <option value = "1">Inactive</option>
                     </select>
                 </div>
             </div>

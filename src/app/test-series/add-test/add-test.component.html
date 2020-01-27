@@ -37,7 +37,7 @@
     <!-- sidebar ends here -->
 
     <!-- content div starts here -->
-    <div class="content clearfix pl-5 mt-5" style="z-index: 1; overflow: hidden; white-space: nowrap;">
+    <div class="content clearfix pl-5 mt-5" style="z-index: 1;  white-space: nowrap;" >
         <div class="row ml-1">
             <button type="button" class="btn btn-info" (click)="goToTestSeries()">Back</button>
         </div>
@@ -127,13 +127,13 @@
                     <input type="time" formControlName="durationOfTest" class="form-control"  data-format="HH:mm" data-template="HH : mm">
                 </div>
 
-                <div class=" col-lg-4 col-xl-3 pr-5 mr-5"  >
+                <div class=" col-lg-4 col-xl-3 pr-5 mr-5" *ngIf= "selectedYearData >= currentYear && selectedYearData != '' && selectedYearData != undefined" >
                     <label>Start Date & Time</label>
                     <input  class="form-control" formControlName="startDateAndTime"  [min]="min" [max]="max" placeholder="Start Date & Time"
                         [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
                     <owl-date-time [disabled]="currentYear > selectedYearData || selectedYearData == '' || selectedYearData == undefined " [startAt]="startAt" #dt1></owl-date-time>
                 </div>
-                <div class=" col-lg-4 col-xl-3 pr-5 mr-5" >
+                <div class=" col-lg-4 col-xl-3 pr-5 mr-5" *ngIf = "selectedYearData >= currentYear && selectedYearData != '' && selectedYearData != undefined && startDateAndTime.value != ''">
                     <label>End Date & Time</label>
                     <input class="form-control"  formControlName="endDateAndTime" [min]="startDateAndTime.value" [max]="max" placeholder="End Date & Time"
                         [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2">
@@ -144,12 +144,21 @@
             <div class="row pt-2 mb-5">
                 <div class=" col-lg-4 col-xl-3 pr-5 mr-5">
                     <label>Syllabus</label>
-                    <select class="form-control" formControlName="syllabus"
+                    <!-- <select  class="form-control" formControlName="syllabus"
                         [ngClass]="{ 'is-invalid': submitted }">
                         <option value="" disabled selected hidden>Select Syllabus</option>
-                        <option *ngFor="let syllabus of ['syllabus1','syllabus2','syllabus3']" value="{{syllabus}}">
-                            {{syllabus}}</option>
-                    </select>
+                            
+                        <option *ngFor="let syllabus of syllabusList" value="{{syllabus.syllabusName}}">
+                            {{syllabus.syllabusName}}
+                        </option>
+                    </select> -->
+
+                    <ng-multiselect-dropdown  [placeholder]="'Select Syllabus'" [data]="dropdownSyllabus" formControlName="syllabus" 
+                        [settings]="dropdownSettings1" (onSelect)="onSyllabuslSelect($event)"
+                        (onSelectAll)="onSelectAllSyllabus($event)">
+                    </ng-multiselect-dropdown>
+
+
                 </div>
                 <div class="col-lg-4 col-xl-3 pr-5 mr-5">
                     <label>No. Of Questions</label>
@@ -200,7 +209,8 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-info mb-5" (click)="addSection()">Add Section</button>
+                <button type="button" class="btn btn-info mb-5 mr-2" (click)="addSection()">Add Section</button>
+                <button type="button" *ngIf= "t.length > 2" class="btn btn-info mb-5 ml-2" (click)="deleteSection(t.length-1)">Delete Section</button>
 
             </div>
 
@@ -220,7 +230,8 @@
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-info mb-5" (click)="addSection()">Add Section</button>
+                <button type="button" class="btn btn-info mb-5 mr-2" (click)="addSection()">Add Section</button>
+                <button type="button" *ngIf= "t.length > 2" class="btn btn-info mb-5 mr-2" (click)="deleteSection(t.length-1)">Delete Section</button>
 
 
             </div>
@@ -273,12 +284,15 @@
                             {{option}}</option>
                     </select>
                 </div>
-                <div class=" col-lg-4 col-xl-3 pr-5 mr-5">
-                    <label>Language</label>
-                    <select class="form-control" formControlName="language">
-                        <option value="" disabled selected hidden>Select Language</option>
-                        <option *ngFor="let j of ['English','Hindi','Gujarati']" value="{{j}}">{{j}}</option>
-                    </select>
+
+                <div class="col-lg-4 col-xl-3 pr-5 mr-5">
+                    <label for="Language">Language</label>
+                    <ng-multiselect-dropdown  [placeholder]="'Select Language'" [data]="dropdownLanguage" formControlName="language" 
+                        [settings]="dropdownSettings" (onSelect)="onLanguageSelect($event)"
+                        (onSelectAll)="onSelectAll($event)">
+                    </ng-multiselect-dropdown>
+
+
                 </div>
 
                 <div class=" col-lg-4 col-xl-3 pr-5 mr-5">
