@@ -16,6 +16,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { FileUploadModule } from 'ng2-file-upload';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { TreeviewModule } from 'ngx-treeview';
+import { TestService } from '../test.service';
 
 
 
@@ -34,8 +36,9 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     OwlNativeDateTimeModule,
     FileUploadModule,
     ToastrModule.forRoot(),
+    TreeviewModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot()
   ],
-  providers: [CookieService, DatePipe]
+  providers: [CookieService, DatePipe, TestService]
 })
 export class TestSeriesModule { }

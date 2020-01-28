@@ -7,15 +7,28 @@ import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { from } from 'rxjs';
 import * as $ from 'jquery';
 import { Location } from "@angular/common";
+import { TestService } from 'src/app/test.service';
+import { TreeviewItem, TreeviewConfig } from 'ngx-treeview';
 
 @Component({
   selector: 'app-add-test',
   templateUrl: './add-test.component.html',
   styleUrls: ['./add-test.component.css'],
   //changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [Location]
+  providers: [Location,TestService]
 })
 export class AddTestComponent implements OnInit, OnDestroy {
+
+  dropdownEnabled = true;
+  items: TreeviewItem[];
+  values: [];
+  config = TreeviewConfig.create({
+      hasAllCheckBox: true,
+      hasFilter: false,
+      hasCollapseExpand: false,
+      decoupleChildFromParent: false,
+      maxHeight: 200
+  });
 
   public testList = [
     {
@@ -118,10 +131,10 @@ export class AddTestComponent implements OnInit, OnDestroy {
   dropdownSyllabus = [];
   dropdownLanguage = [];
   dropdownSettings = {};
-  dropdownSettings1: {};
-  dropdownTopic= [];
 
-  constructor(private fb: FormBuilder, public toastr: ToastrManager, private location: Location, private _route: ActivatedRoute, private router: Router, private renderer2: Renderer2, @Inject(DOCUMENT) private _document) { }
+   expanded = false;
+
+  constructor(private fb: FormBuilder, private service: TestService, public toastr: ToastrManager, private location: Location, private _route: ActivatedRoute, private router: Router, private renderer2: Renderer2, @Inject(DOCUMENT) private _document) { }
 
   ngOnInit() {
 
@@ -155,9 +168,9 @@ export class AddTestComponent implements OnInit, OnDestroy {
       }
     };
 
-    for(let x of this.syllabusList){
-      this.dropdownSyllabus.push(x.syllabusName);
-    }
+    this.items = this.service.getSyllabus();
+
+  
 
     this.dropdownLanguage = ["Hindi", "English", "Gujarati", "French"]
 
@@ -166,14 +179,6 @@ export class AddTestComponent implements OnInit, OnDestroy {
       selectAllLanguage: 'Select All',
       unSelectAllLanguage: 'UnSelect All',
       itemsShowLimit: 3,
-      allowSearchFilter: false
-    };
-
-    this.dropdownSettings1 = {
-      singleSelection: false,
-      selectAllSyllabus: 'Select All',
-      unSelectAllSyllabus: 'UnSelect All',
-      itemsShowLimit: 2,
       allowSearchFilter: false
     };
 
@@ -191,8 +196,8 @@ export class AddTestComponent implements OnInit, OnDestroy {
       durationOfTest: [''],
       startDateAndTime: [''],
       endDateAndTime: [''],
-      syllabus: [''],
-      topic:[''],
+      // syllabus: [''],
+      // topic:[''],
       noOfQuestion: [''],
       totalMarks: [''],
       resumeTest: [''],
@@ -221,22 +226,21 @@ export class AddTestComponent implements OnInit, OnDestroy {
     console.log(Languages);
   }
 
-  onSyllabuslSelect(Syllabus: any) {
-    console.log("fggfffgfg",Syllabus);
-    for(let x of this.syllabusList){
-      if(x.syllabusName == Syllabus){
-        this.dropdownTopic.push(...x.topicArray)
-      } 
-    }
-    console.log("topic list",this.dropdownTopic)
-  }
-  onSelectAllSyllabus(Syllabus: any) {
-    console.log("kllklklklkl",Syllabus);
-  }
-
   onCkeChange($event: any): void {
     console.log("onChange", $event);
 
+  }
+
+
+  showCheckboxes() {
+    var checkboxes = document.getElementById("checkboxes");
+    if (!this.expanded) {
+      checkboxes.style.display = "block";
+      this.expanded = true;
+    } else {
+      checkboxes.style.display = "none";
+      this.expanded = false;
+    }
   }
 
   //   createSection(): FormGroup {
@@ -271,6 +275,16 @@ export class AddTestComponent implements OnInit, OnDestroy {
         sectionOfTest: ['No'],
         timeConstraint: ['No']
       })
+    }
+  }
+
+  onSelectedChange(e){
+    console.log("value of e is",e);
+    for(let x of this.items){
+      if(x.indeterminate == true || x.checked == true){
+        console.log("item is",x.text)
+      }
+      //  console.log("item is",x)
     }
   }
 

@@ -37,7 +37,7 @@
     <!-- sidebar ends here -->
 
     <!-- content div starts here -->
-    <div class="content clearfix pl-5 mt-5" style="z-index: 1;  white-space: nowrap;" >
+    <div class="content clearfix pl-5 mt-5" style="z-index: 1;  white-space: nowrap;">
         <div class="row ml-1">
             <button type="button" class="btn btn-info" (click)="goToTestSeries()">Back</button>
         </div>
@@ -109,7 +109,8 @@
                     <label>Test Type</label>
                     <select class="form-control" formControlName="testType" [ngClass]="{ 'is-invalid': submitted }">
                         <option value="" disabled selected hidden>Select Test Type</option>
-                        <option *ngFor="let testType of ['Mock Test','Subject Test','Multiple Test']" value="{{testType}}">{{testType}}
+                        <option *ngFor="let testType of ['Mock Test','Subject Test','Multiple Test']"
+                            value="{{testType}}">{{testType}}
                         </option>
                     </select>
                 </div>
@@ -124,26 +125,45 @@
             <div class="row pt-2 mb-5">
                 <div class=" col-lg-4 col-xl-3 pr-5 mr-5">
                     <label>Duration of Test</label>
-                    <input type="time" formControlName="durationOfTest" class="form-control"  data-format="HH:mm" data-template="HH : mm">
+                    <input type="time" formControlName="durationOfTest" class="form-control" data-format="HH:mm"
+                        data-template="HH : mm">
                 </div>
 
-                <div class=" col-lg-4 col-xl-3 pr-5 mr-5" *ngIf= "selectedYearData >= currentYear && selectedYearData != '' && selectedYearData != undefined" >
+                <div class=" col-lg-4 col-xl-3 pr-5 mr-5"
+                    *ngIf="selectedYearData >= currentYear && selectedYearData != '' && selectedYearData != undefined">
                     <label>Start Date & Time</label>
-                    <input  class="form-control" formControlName="startDateAndTime"  [min]="min" [max]="max" placeholder="Start Date & Time"
-                        [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
-                    <owl-date-time [disabled]="currentYear > selectedYearData || selectedYearData == '' || selectedYearData == undefined " [startAt]="startAt" #dt1></owl-date-time>
+                    <input class="form-control" formControlName="startDateAndTime" [min]="min" [max]="max"
+                        placeholder="Start Date & Time" [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
+                    <owl-date-time
+                        [disabled]="currentYear > selectedYearData || selectedYearData == '' || selectedYearData == undefined "
+                        [startAt]="startAt" #dt1></owl-date-time>
                 </div>
-                <div class=" col-lg-4 col-xl-3 pr-5 mr-5" *ngIf = "selectedYearData >= currentYear && selectedYearData != '' && selectedYearData != undefined && startDateAndTime.value != ''">
+                <div class=" col-lg-4 col-xl-3 pr-5 mr-5"
+                    *ngIf="selectedYearData >= currentYear && selectedYearData != '' && selectedYearData != undefined && startDateAndTime.value != ''">
                     <label>End Date & Time</label>
-                    <input class="form-control"  formControlName="endDateAndTime" [min]="startDateAndTime.value" [max]="max" placeholder="End Date & Time"
-                        [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2">
-                    <owl-date-time [disabled]="currentYear > selectedYearData || selectedYearData == '' || selectedYearData == undefined || startDateAndTime.value == ''" [startAt]="startAt" #dt2></owl-date-time>
+                    <input class="form-control" formControlName="endDateAndTime" [min]="startDateAndTime.value"
+                        [max]="max" placeholder="End Date & Time" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2">
+                    <owl-date-time
+                        [disabled]="currentYear > selectedYearData || selectedYearData == '' || selectedYearData == undefined || startDateAndTime.value == ''"
+                        [startAt]="startAt" #dt2></owl-date-time>
                 </div>
             </div>
 
             <div class="row pt-2 mb-5">
                 <div class=" col-lg-4 col-xl-3 pr-5 mr-5">
                     <label>Syllabus</label>
+
+                    <!-- <ngx-treeview [config]="config" [items]="items" (selectedChange)="values = $event" (selectedChange)=" onSelectedChange($event)">
+                    </ngx-treeview> -->
+                    <div >
+                    <ngx-dropdown-treeview  [buttonClass]="buttonClass" [config]="config" [items]="items"
+                         (selectedChange)="onSelectedChange($event)" >
+                    </ngx-dropdown-treeview>
+                    </div>
+
+                    <!-- <div class="alert alert-success"  role="alert">
+                        Selected books: {{values}}
+                      </div> -->
                     <!-- <select  class="form-control" formControlName="syllabus"
                         [ngClass]="{ 'is-invalid': submitted }">
                         <option value="" disabled selected hidden>Select Syllabus</option>
@@ -153,27 +173,42 @@
                         </option>
                     </select> -->
 
-                    <ng-multiselect-dropdown  [placeholder]="'Select Syllabus'" [data]="dropdownSyllabus" formControlName="syllabus" 
+                    <!-- <ng-multiselect-dropdown  [placeholder]="'Select Syllabus'" [data]="dropdownSyllabus" formControlName="syllabus" 
                         [settings]="dropdownSettings1" (onSelect)="onSyllabuslSelect($event)"
                         (onSelectAll)="onSelectAllSyllabus($event)">
-                    </ng-multiselect-dropdown>
+                    </ng-multiselect-dropdown> -->
+
+                    <!-- <div class="multiselect"> -->
+                    <!-- <div class=" selectBox"  (click)="showCheckboxes()">
+                          <select>
+                            <option>Select an option</option>
+                          </select>
+                          <div class="overSelect"></div>
+                        </div>
+                        <div id="checkboxes">
+                          <label   *ngFor="let syllabus of syllabusList">
+                            <input type="checkbox" formControlName="syllabus" >{{syllabus.syllabusName}}</label>
+                          
+                        </div> -->
+                    <!-- </div> -->
 
 
                 </div>
                 <div class="col-lg-4 col-xl-3 pr-5 mr-5">
                     <label>No. Of Questions</label>
-                    <input type="text" formControlName="noOfQuestion" class="form-control" placeholder="Enter no. of Question">
+                    <input type="text" formControlName="noOfQuestion" class="form-control"
+                        placeholder="Enter no. of Question">
                 </div>
                 <div class="col-lg-4 col-xl-3 pr-5 mr-5">
                     <label>Total Marks</label>
-                    <input type="text" formControlName="totalMarks" class="form-control" placeholder="Enter Total Marks">
+                    <input type="text" formControlName="totalMarks" class="form-control"
+                        placeholder="Enter Total Marks">
                 </div>
             </div>
             <div class="row pt-2 mb-5">
                 <div class=" col-lg-4 col-xl-3 pr-5 mr-5">
                     <label>Resume Test</label>
-                    <select class="form-control" formControlName="resumeTest"
-                        [ngClass]="{ 'is-invalid': submitted }">
+                    <select class="form-control" formControlName="resumeTest" [ngClass]="{ 'is-invalid': submitted }">
                         <option value="" disabled selected hidden>Select Option</option>
                         <option *ngFor="let option of ['Yes','No']" value="{{option}}">
                             {{option}}</option>
@@ -181,17 +216,17 @@
                 </div>
                 <div class=" col-lg-4 col-xl-3 pr-5 mr-5">
                     <label>Section Of Test</label>
-                    <select class="form-control" (change)="onSelectedSectionOption($event)" formControlName="sectionOfTest"
-                        [ngClass]="{ 'is-invalid': submitted }">
+                    <select class="form-control" (change)="onSelectedSectionOption($event)"
+                        formControlName="sectionOfTest" [ngClass]="{ 'is-invalid': submitted }">
                         <option value="" disabled selected hidden>Select Option</option>
                         <option *ngFor="let option of ['Yes','No']" value="{{option}}">
                             {{option}}</option>
                     </select>
                 </div>
-                <div class=" col-lg-4 col-xl-3 pr-5 mr-5" *ngIf = "sectionOfTest.value == 'Yes'">
+                <div class=" col-lg-4 col-xl-3 pr-5 mr-5" *ngIf="sectionOfTest.value == 'Yes'">
                     <label>Time Constraint</label>
-                    <select class="form-control" (change)="onSelectedDurationOption($event)" formControlName="timeConstraint"
-                        [ngClass]="{ 'is-invalid': submitted }">
+                    <select class="form-control" (change)="onSelectedDurationOption($event)"
+                        formControlName="timeConstraint" [ngClass]="{ 'is-invalid': submitted }">
                         <option value="" disabled selected hidden>Select Option</option>
                         <option *ngFor="let option of ['Yes','No']" value="{{option}}">
                             {{option}}</option>
@@ -199,7 +234,7 @@
                 </div>
             </div>
 
-            <div formArrayName="sectionArray" *ngIf = "sectionOfTest.value == 'Yes' && timeConstraint.value == 'No'">
+            <div formArrayName="sectionArray" *ngIf="sectionOfTest.value == 'Yes' && timeConstraint.value == 'No'">
                 <div *ngFor="let section of t.controls; let i = index" [formGroupName]="i">
                     <div [formGroup]="section" class="row pt-2 mb-5">
                         <div class="form-group col-lg-4 col-xl-3 pr-5 mr-5">
@@ -210,11 +245,12 @@
                     </div>
                 </div>
                 <button type="button" class="btn btn-info mb-5 mr-2" (click)="addSection()">Add Section</button>
-                <button type="button" *ngIf= "t.length > 2" class="btn btn-info mb-5 ml-2" (click)="deleteSection(t.length-1)">Delete Section</button>
+                <button type="button" *ngIf="t.length > 2" class="btn btn-info mb-5 ml-2"
+                    (click)="deleteSection(t.length-1)">Delete Section</button>
 
             </div>
 
-            <div formArrayName="sectionArray" *ngIf = "sectionOfTest.value == 'Yes' && timeConstraint.value == 'Yes'">
+            <div formArrayName="sectionArray" *ngIf="sectionOfTest.value == 'Yes' && timeConstraint.value == 'Yes'">
                 <div *ngFor="let section of t.controls; let i = index" [formGroupName]="i">
                     <div [formGroup]="section" class="row pt-2 mb-5">
                         <div class="form-group col-lg-4 col-xl-3 pr-5 mr-5">
@@ -224,14 +260,15 @@
                         </div>
                         <div class="form-group col-lg-4 col-xl-3 pr-5 mr-5">
                             <label>Duration Section {{i+1}} in HH:MM</label>
-                            <input type="time" formControlName="sectionDuration" class="form-control" data-format="HH:mm" data-template="HH : mm"
-                                placeholder="Enter Section Duration">
+                            <input type="time" formControlName="sectionDuration" class="form-control"
+                                data-format="HH:mm" data-template="HH : mm" placeholder="Enter Section Duration">
                         </div>
                     </div>
                 </div>
 
                 <button type="button" class="btn btn-info mb-5 mr-2" (click)="addSection()">Add Section</button>
-                <button type="button" *ngIf= "t.length > 2" class="btn btn-info mb-5 mr-2" (click)="deleteSection(t.length-1)">Delete Section</button>
+                <button type="button" *ngIf="t.length > 2" class="btn btn-info mb-5 mr-2"
+                    (click)="deleteSection(t.length-1)">Delete Section</button>
 
 
             </div>
@@ -244,8 +281,8 @@
             <div class="row  pt-2 mb-5">
                 <div class="col pr-5 mr-5">
                     <label>Instructions</label>
-                    <ckeditor type="text" tagName="textarea" formControlName="instruction" 
-                        [config]="ckeConfig" debounce="500" (change)="onCkeChange($event)" data-sample-short>
+                    <ckeditor type="text" tagName="textarea" formControlName="instruction" [config]="ckeConfig"
+                        debounce="500" (change)="onCkeChange($event)" data-sample-short>
                     </ckeditor>
                 </div>
             </div>
@@ -261,8 +298,8 @@
             <div class="row  pt-2 mb-5">
                 <div class="col pr-5 mr-5">
                     <label>General Instructions</label>
-                    <ckeditor type="text" tagName="textarea" formControlName="generalInstruction" 
-                        [config]="ckeConfig" debounce="500" (change)="onCkeChange($event)" data-sample-short>
+                    <ckeditor type="text" tagName="textarea" formControlName="generalInstruction" [config]="ckeConfig"
+                        debounce="500" (change)="onCkeChange($event)" data-sample-short>
                     </ckeditor>
                 </div>
             </div>
@@ -270,8 +307,8 @@
                 <div class="col-md-6 pr-5 mr-5">
                     <label><i class="fa fa-cloud-upload" style="font-size:24px;color: rgb(78, 186, 248);"></i>
                         <span> Attach Pdf </span></label>
-                    <input type="file" class="form-control-file" formControlName="generalInstructionPdf" id="generalInstruction"
-                        multiple>
+                    <input type="file" class="form-control-file" formControlName="generalInstructionPdf"
+                        id="generalInstruction" multiple>
                 </div>
             </div>
             <div class="row  pt-2 mb-5">
@@ -287,8 +324,8 @@
 
                 <div class="col-lg-4 col-xl-3 pr-5 mr-5">
                     <label for="Language">Language</label>
-                    <ng-multiselect-dropdown  [placeholder]="'Select Language'" [data]="dropdownLanguage" formControlName="language" 
-                        [settings]="dropdownSettings" (onSelect)="onLanguageSelect($event)"
+                    <ng-multiselect-dropdown [placeholder]="'Select Language'" [data]="dropdownLanguage"
+                        formControlName="language" [settings]="dropdownSettings" (onSelect)="onLanguageSelect($event)"
                         (onSelectAll)="onSelectAll($event)">
                     </ng-multiselect-dropdown>
 
@@ -306,8 +343,8 @@
             <div class="row  pt-2 mb-5" *ngIf="showUsefulData.value == 'Yes'">
                 <div class="col pr-5 mr-5">
                     <label>Useful Data</label>
-                    <ckeditor type="text" tagName="textarea" formControlName="usefulData" 
-                        [config]="ckeConfig" debounce="500" (change)="onCkeChange($event)" data-sample-short>
+                    <ckeditor type="text" tagName="textarea" formControlName="usefulData" [config]="ckeConfig"
+                        debounce="500" (change)="onCkeChange($event)" data-sample-short>
                     </ckeditor>
                 </div>
             </div>

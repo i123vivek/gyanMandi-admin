@@ -21,6 +21,8 @@ import { ExamModule } from './exam/exam.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { TestSeriesModule } from './test-series/test-series.module';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { TreeviewModule } from 'ngx-treeview';
+import { TestService } from './test.service';
 
 
 @NgModule({
@@ -42,9 +44,10 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     OwlNativeDateTimeModule,
     NgbModule,
     ToastrModule.forRoot(),
+    TreeviewModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot()
   ],
-  providers: [CookieService,ExamService],
+  providers: [CookieService,ExamService,TestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
