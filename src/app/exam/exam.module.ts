@@ -17,12 +17,13 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AddTopicComponent } from './add-topic/add-topic.component';
 import { AddQuestionCategoryComponent } from './add-question-category/add-question-category.component';
+import { GenderComponent } from './gender/gender.component';
 
 
 
 
 @NgModule({
-  declarations: [ExaminationComponent, AddExamComponent, AddSubjectComponent, AddTopicComponent, AddQuestionCategoryComponent],
+  declarations: [ExaminationComponent, AddExamComponent, AddSubjectComponent, AddTopicComponent, AddQuestionCategoryComponent, GenderComponent],
   imports: [
     CommonModule,
     AppRoutingModule,

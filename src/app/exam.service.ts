@@ -16,10 +16,18 @@ import { Options } from 'selenium-webdriver/opera';
 })
 export class ExamService {
 
-  // private url = 'http://localhost:8000';
-  private url = 'http://35.224.20.11:8000';
+  private url = 'http://localhost:8000';
+  //private url = 'http://35.224.20.11:8000';
 
   constructor(public http: HttpClient, public router: Router) { }
+
+  private options = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
 
 
   public getExamInfoFromLocalstorage = () => {
@@ -28,6 +36,17 @@ export class ExamService {
 
   public setExamInfoInLocalStorage = (data) => {
     localStorage.setItem('examInfo', JSON.stringify(data))
+  }
+
+  public createGender(data: any) : Observable<any>{
+    const params = new HttpParams()
+      .set('gender_code', data)
+    return this.http.post(`${this.url}/students/gender/2/`,data, this.options)
+  }
+
+
+  public getGender(): Observable<any>{
+    return this.http.get(`${this.url}/students/gender/2/`)
   }
 
   public createExam(file): Observable<any>{

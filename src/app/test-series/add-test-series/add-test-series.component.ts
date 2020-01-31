@@ -86,11 +86,13 @@ export class AddTestSeriesComponent implements OnInit, OnDestroy {
 
     this.ckeConfig = {
       allowedContent: false,
-      extraPlugins: 'divarea,mathjax,easyimage',
+      //,easyimage
+      extraPlugins: 'mathjax',
+      removePlugins :'image',
       mathJaxLib: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML',
       forcePasteAsPlainText: true,
       pasteFromWordRemoveFontStyles: true,
-      cloudServices_tokenUrl:'YOUR_TOKEN_URL',
+      //cloudServices_tokenUrl:'YOUR_TOKEN_URL',
       // cloudServices_tokenUrl: 'https://example.com/cs-token-endpoint',
       // cloudServices_uploadUrl: 'https://your-organization-id.cke-cs.com/easyimage/upload/',
 

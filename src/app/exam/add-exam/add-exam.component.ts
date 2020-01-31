@@ -48,12 +48,13 @@ export class AddExamComponent implements OnInit, OnDestroy {
 
     this.ckeConfig = {
       allowedContent: false,
-      extraPlugins: 'divarea,mathjax,easyimage',
+      //,easyimage
+      extraPlugins: 'divarea,mathjax',
       mathJaxLib: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML',
       forcePasteAsPlainText: true,
       pasteFromWordRemoveFontStyles: true,
 
-      cloudServices_tokenUrl:'YOUR_TOKEN_URL',
+      // cloudServices_tokenUrl:'YOUR_TOKEN_URL',
       //cloudServices_uploadUrl:'YOUR_UPLOAD_URL',
 
     //   cloudServices: {
@@ -114,17 +115,17 @@ export class AddExamComponent implements OnInit, OnDestroy {
   public addExam = () => {
 
     let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#photo');
-    let inputElP: HTMLInputElement = this.el.nativeElement.querySelector('#pattern');
-    let inputElS: HTMLInputElement = this.el.nativeElement.querySelector('#syllabus');
-    let inputElA: HTMLInputElement = this.el.nativeElement.querySelector('#about');
+    // let inputElP: HTMLInputElement = this.el.nativeElement.querySelector('#pattern');
+    // let inputElS: HTMLInputElement = this.el.nativeElement.querySelector('#syllabus');
+    // let inputElA: HTMLInputElement = this.el.nativeElement.querySelector('#about');
     let examImageFileCount: number = inputEl.files.length;
-    let examPatternFileCount: number = inputElP.files.length;
-    let examSyllabusFileCount: number = inputElS.files.length;
-    let aboutExamFileCount: number = inputElA.files.length;
+    // let examPatternFileCount: number = inputElP.files.length;
+    // let examSyllabusFileCount: number = inputElS.files.length;
+    // let aboutExamFileCount: number = inputElA.files.length;
     let examImageFile = inputEl.files[0];
-    let examPatternFile = inputElP.files[0];
-    let examSyllabusFile = inputElS.files[0];
-    let aboutExamFile = inputElA.files[0];
+    // let examPatternFile = inputElP.files[0];
+    // let examSyllabusFile = inputElS.files[0];
+    // let aboutExamFile = inputElA.files[0];
     let phaseObjForPhase1 = JSON.stringify({
       phase_name: this.examName,
       weightage: this.weightageOfExam
@@ -154,9 +155,9 @@ export class AddExamComponent implements OnInit, OnDestroy {
 
 
     console.log('exam image file here is', examImageFile);
-    console.log('exam pattern pdf file here is', examPatternFile);
-    console.log('exam syllabus pdf file here is', examSyllabusFile);
-    console.log('about exam pdf file here is', aboutExamFile);
+    // console.log('exam pattern pdf file here is', examPatternFile);
+    // console.log('exam syllabus pdf file here is', examSyllabusFile);
+    // console.log('about exam pdf file here is', aboutExamFile);
 
     let formData = new FormData();
 
@@ -166,7 +167,7 @@ export class AddExamComponent implements OnInit, OnDestroy {
     formData.append('pattern_txt', this.examPattern);
     formData.append('syllabus_txt', this.Syllabus);
     formData.append('about_txt', this.aboutExam);
-    formData.append('phaseNumber',this.phaseNumber);
+    //formData.append('phaseNumber',this.phaseNumber);
     //formData.append('phase', phaseObjForPhase2)
     if (this.phaseNumber == 3) {
       formData.append('phase', phaseObjForPhase3)
@@ -181,21 +182,21 @@ export class AddExamComponent implements OnInit, OnDestroy {
         formData.append('image', inputEl.files[i]);
       }
     }
-    if (examPatternFileCount > 0) {
-      for (let i = 0; i < examPatternFileCount; i++) {
-        formData.append('pattern_pdf', inputElP.files[i]);
-      }
-    }
-    if (examSyllabusFileCount > 0) {
-      for (let i = 0; i < examSyllabusFileCount; i++) {
-        formData.append('syllabus_pdf', inputElS.files[i]);
-      }
-    }
-    if (aboutExamFileCount > 0) {
-      for (let i = 0; i < aboutExamFileCount; i++) {
-        formData.append('about_pdf', inputElA.files[i]);
-      }
-    }
+    // if (examPatternFileCount > 0) {
+    //   for (let i = 0; i < examPatternFileCount; i++) {
+    //     formData.append('pattern_pdf', inputElP.files[i]);
+    //   }
+    // }
+    // if (examSyllabusFileCount > 0) {
+    //   for (let i = 0; i < examSyllabusFileCount; i++) {
+    //     formData.append('syllabus_pdf', inputElS.files[i]);
+    //   }
+    // }
+    // if (aboutExamFileCount > 0) {
+    //   for (let i = 0; i < aboutExamFileCount; i++) {
+    //     formData.append('about_pdf', inputElA.files[i]);
+    //   }
+    // }
 
 
     this.examService.createExam(formData).subscribe(

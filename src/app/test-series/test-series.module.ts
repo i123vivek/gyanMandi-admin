@@ -18,11 +18,12 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { TreeviewModule } from 'ngx-treeview';
 import { TestService } from '../test.service';
+import { QuestionPageComponent } from './question-page/question-page.component';
 
 
 
 @NgModule({
-  declarations: [TestSeriesComponent, AddTestSeriesComponent, AddTestComponent, AddQuestionComponent],
+  declarations: [TestSeriesComponent, AddTestSeriesComponent, AddTestComponent, AddQuestionComponent, QuestionPageComponent],
   imports: [
     CommonModule,
     AppRoutingModule,
