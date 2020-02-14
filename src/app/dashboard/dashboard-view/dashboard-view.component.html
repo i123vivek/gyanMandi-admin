@@ -1,0 +1,195 @@
+<div class="container-fluid p-0 m-0">
+
+    <!-- navbar starts here -->
+    <nav class="navbar navbar-expand-lg navbar-light navbar-fixed fixed-top" style="background-color: white;">
+        <a class="navbar-brand" href="">
+            <img src="assets/logo.png" width="100" height="60" class="d-inline-block align-top" alt="">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <div class=" ml-auto">
+                <ul class="nav justify-content-end">
+                    <li>
+                        <a class="btn icon-profile" style="color: rgb(78, 186, 248);" href="">
+                            <i class="fa fa-user" style="font-size:24px; color: rgb(78, 186, 248);"></i> Anchal
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- navbar ends here -->
+
+
+    <!-- sidebar starts here -->
+    <div class="sidebar mt-4">
+        <a class="active" href="/dashboard">DASHBOARD</a>
+        <a href="/examination">EXAMINATION</a>
+        <a href="/test-series">TEST SERIES</a>
+        <a href="/classroom">CLASSROOM</a>
+    </div>
+    <!-- sidebar ends here -->
+
+    <!-- content div start here -->
+    <div class="content clearfix pl-5 mt-5" style="z-index: 1; overflow: hidden; white-space: nowrap;">
+
+        <div class="row pl-3 ">
+            <h5>Registerations: {{instituteList.length}} Institutes and {{studentList.length}} Students</h5>
+
+        </div>
+
+
+        <!-- row for nav tab starts here -->
+        <div class="row pl-3 mt-5" id="dashboard">
+            <ul class="nav nav-tabs " id="nav-tab" role="tablist">
+                <li class="nav-item " style="background-color: lightgray;"> <a class="nav-link active"
+                        id="institute-tab" data-toggle="tab" href="#institute" role="tab" aria-controls="institute"
+                        aria-selected="true">Institutes</a> </li>
+                <li class="nav-item" style="background-color: lightgray;"> <a class="nav-link" id="student-tab"
+                        data-toggle="tab" href="#student" role="tab" aria-controls="student"
+                        aria-selected="false">Students</a> </li>
+            </ul>
+
+            <div class="input-group col-md-3  ml-auto">
+                <input type="text" class="form-control" placeholder="filter" aria-label="filter1"
+                    aria-describedby="filter1">
+            </div>
+
+            <div class="input-group col-md-3 pb-1 ml-auto">
+                <input type="text" class="form-control" placeholder="search" aria-label="search1"
+                    aria-describedby="search1">
+                <div class="input-group-append">
+                    <span class="input-group-text" id="search1"><i class="fa fa-search"
+                            style="font-size:24px; color:rgb(39, 131, 236);"></i></span>
+                </div>
+            </div>
+        </div>
+        <!-- row for nav tab ends here -->
+
+        <!-- tab content div starts here -->
+        <div class="tab-content" id="nav-tabContent">
+
+            <!-- div for institute tabs starts here-->
+            <div class="tab-pane active mt-5" id="institute" role="tabpanel" aria-labelledby="institute-tab">
+
+                <!-- div for institute table starts here -->
+                <div class='row '>
+                    <div class="col-sm-12 ">
+                        <table class='table institute table-bordered table-condensed table-striped table-hover'>
+                            <thead>
+                                <tr>
+                                    <th>Sr. no.</th>
+                                    <th>Name</th>
+                                    <th>Mobile</th>
+                                    <th>Email</th>
+                                    <th>City</th>
+                                    <th>District</th>
+                                    <th>State</th>
+                                    <th>Status</th>
+                                    <th>Profile</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr class="clearfix cursorPointer"
+                                    *ngFor="let institute of instituteList | paginate: { id: 'pagination1', itemsPerPage: count, currentPage: p };">
+                                    <td>{{institute.Id}}</td>
+                                    <td>{{institute.InstituteName}}</td>
+                                    <td>{{institute.MobileNumber}}</td>
+                                    <td>{{institute.Email}}</td>
+                                    <td>{{institute.City}}</td>
+                                    <td>{{institute.District}}</td>
+                                    <td>{{institute.State}}</td>
+                                    <td>{{institute.Status}}</td>
+                                    <td><button type="button" class="btn btn-link">Click</button></td>
+                                    <td><i class="fa fa-edit"  [routerLink]="['/dashboard',institute.Id,'institute-edit']"
+                                            style="font-size:24px;color:rgb(39, 131, 236);"></i>
+                                        &nbsp; <i class="fa fa-trash-o"
+                                            style="font-size:24px;color:rgb(39, 131, 236);"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- div for institute table ends here -->
+
+                <br>
+
+                <!-- pagination div for institute starts here -->
+                <div class="text-center ">
+                    <pagination-controls id="pagination1" (pageChange)="p = $event"></pagination-controls>
+                </div>
+                <!-- pagination div for institute ends here -->
+            </div>
+            <!-- div for institute tabs ends here-->
+
+            <!-- div for student tabs starts here-->
+            <div class="tab-pane fade" id="student" role="tabpanel" aria-labelledby="student-tab">
+
+                <!-- div for student table starts here -->
+                <div class='row '>
+                    <div class="col-sm-12 mt-5">
+                        <table class='table student table-bordered table-condensed table-striped table-hover'>
+                            <thead>
+                                <tr>
+                                    <th>Sr. no.</th>
+                                    <th>Name</th>
+                                    <th>Institute Name</th>
+                                    <th>Exam Name</th>
+                                    <th>Exam Year</th>
+                                    <th>Product Type</th>
+                                    <th>District</th>
+                                    <th>State</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr class="clearfix cursorPointer"
+                                    *ngFor="let student of studentList | paginate: { id: 'pagination2', itemsPerPage: count, currentPage: p };">
+                                    <td>{{student.Id}}</td>
+                                    <td>{{student.StudentName}}</td>
+                                    <td>{{student.InstituteName}}</td>
+                                    <td>{{student.ExamName}}</td>
+                                    <td>{{student.ExamYear}}</td>
+                                    <td>{{student.ProductType}}</td>
+                                    <td>{{student.District}}</td>
+                                    <td>{{student.State}}</td>
+                                    <td>{{student.Status}}</td>
+                                    <td><i class="fa fa-edit" [routerLink]="['/dashboard',student.Id,'student-edit']"
+                                            style="font-size:24px;color:rgb(39, 131, 236);"></i>
+                                        &nbsp; <i class="fa fa-trash-o"
+                                            style="font-size:24px;color:rgb(39, 131, 236);"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- div for student table ends here -->
+
+                <br>
+
+                <!-- pagination div for student starts here -->
+                <div class="text-center ">
+                    <pagination-controls id="pagination2" (pageChange)="p = $event"></pagination-controls>
+                </div>
+                <!-- pagination div for student ends here -->
+            </div>
+            <!-- div for student tabs ends here-->
+
+        </div>
+        <!-- tab content div ends here -->
+
+    </div>
+    <!-- content div ends here -->
+
+</div>
