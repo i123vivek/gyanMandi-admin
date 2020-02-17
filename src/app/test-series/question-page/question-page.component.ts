@@ -14,8 +14,20 @@ export class QuestionPageComponent implements OnInit, OnDestroy {
   p: Number = 1;
   count: Number = 5;
   QuestionPageList: any = [];
+  testSeries: any;
+  test: any;
+  sectionOfTest: any;
 
-  constructor(public toastr: ToastrManager, private _route: ActivatedRoute, private router: Router) { }
+  constructor(public toastr: ToastrManager, private _route: ActivatedRoute, private router: Router) {
+
+    this._route.params.subscribe(params => {
+      this.testSeries = params['testSeries'];
+      this.test = params['test'];
+      // this.sectionOfTest = params['sectionOfTest'];
+    
+      console.log(`${this.testSeries},${this.test}`);
+      });
+   }
 
   ngOnInit() {
     this.QuestionPageList = [
@@ -47,6 +59,15 @@ export class QuestionPageComponent implements OnInit, OnDestroy {
         Language: "english",
       },
     ]
+  } 
+
+
+  public goToTest(): any {
+    this.router.navigate(['/test-series']);
+  }
+
+  public goToAddQuestion(): any {
+    this.router.navigate(['/test-series',this.testSeries,this.test,'addQuestion']);
   }
 
   ngOnDestroy(){

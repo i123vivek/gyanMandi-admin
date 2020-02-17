@@ -23,6 +23,11 @@ import { TestSeriesModule } from './test-series/test-series.module';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { TreeviewModule } from 'ngx-treeview';
 import { TestService } from './test.service';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { DashboardService } from './dashboard.service';
+import { ClassroomService } from './classroom.service';
+import { ClassroomModule } from './classroom/classroom.module';
+import { CountriesService } from './countries.service';
 
 
 @NgModule({
@@ -38,8 +43,10 @@ import { TestService } from './test.service';
     CommonModule,
     CKEditorModule,
     FormsModule,
+    DashboardModule,
     ExamModule,
     TestSeriesModule,
+    ClassroomModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     NgbModule,
@@ -47,7 +54,7 @@ import { TestService } from './test.service';
     TreeviewModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot()
   ],
-  providers: [CookieService,ExamService,TestService],
+  providers: [CookieService,ExamService,TestService,DashboardService,ClassroomService,CountriesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

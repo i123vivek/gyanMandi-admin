@@ -1,0 +1,181 @@
+<div class="container-fluid  p-0 m-0">
+    <!-- navbar starts here -->
+    <nav class="navbar navbar-expand-lg navbar-light navbar-fixed fixed-top" style="background-color: white;">
+        <a class="navbar-brand" href="">
+            <img src="assets/logo.png" width="100" height="60" class=" align-top" alt="">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <div class=" ml-auto">
+                <ul class="nav justify-content-end">
+                    <li>
+                        <a class="btn icon-profile" style="color: rgb(78, 186, 248);" href=""><i class="fa fa-user"
+                                style="font-size:24px; color: rgb(78, 186, 248);"></i> Anchal
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- navbar ends here -->
+
+    <!-- sidebar starts here -->
+    <div class="sidebar mt-4">
+        <a class="active" href="/dashboard">DASHBOARD</a>
+        <a href="/examination">EXAMINATION</a>
+        <a href="/test-series">TEST SERIES</a>
+        <a href="/classroom">CLASSROOM</a>
+    </div>
+    <!-- sidebar ends here -->
+
+    <!-- content div starts here -->
+    <div class="content clearfix pl-5 mt-5" style="z-index: 1;  white-space: nowrap;">
+        <div class="row ml-1">
+            <button type="button" class="btn btn-info" [routerLink]="['/dashboard']">Back</button>
+        </div>
+        <hr>
+
+        <form #editStudentForm="ngForm" (ngSubmit)='editStudent()'>
+            <div class="form-row pt-3 ">
+                <div class="form-group col-lg-5 col-xl-4 pr-5 mr-5 mb-3">
+                    <label>Name:</label>
+                    <input type="text" name="studentName" [(ngModel)]="studentName" #name="ngModel" class="form-control"
+                        placeholder="Enter student name" required>
+
+                    <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                        Student Name is required.
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-lg-5 col-xl-4 pr-5 mr-5 pt-2 mb-3">
+                    <label>Mobile Number:</label>
+                    <input type="text" name="mobileNumber" [(ngModel)]="mobileNumber" #number="ngModel"
+                        class="form-control" placeholder="Enter mobile Number" required>
+                </div>
+                <div class="form-group col-lg-5 col-xl-4 pr-5 mr-5 pt-2 mb-3">
+                    <label>Email:</label>
+                    <input type="text" name="email" [(ngModel)]="email" #email1="ngModel" class="form-control"
+                        placeholder="Enter student email" required>
+                </div>
+            </div>
+
+            <div class="form-row  ">
+                <!-- <div class="form-group col-lg-5 col-xl-4 pr-5 mr-5 pt-2 mb-3">
+                    <label>User Profile:</label>
+                    <input type="text" name="userProfile" [(ngModel)]="userProfile" #profile="ngModel" class="form-control"
+                        placeholder="Enter website link" required>
+                </div> -->
+                <div class="form-group col-lg-5 col-xl-4 pr-5 mr-5 pt-2 mb-3">
+                    <label>Status</label>
+                    <select [(ngModel)]="status" #studentStatus="ngModel" name="status" class="form-control" id="status"
+                        required>
+                        <option value="" disabled selected hidden>Select Status</option>
+                        <option *ngFor="let y of ['Active','Inactive']" value="{{y}}">{{y}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="form-row  ">
+
+                <div class="form-group col-lg-5 col-xl-4 pr-5 mr-5 pt-2 mb-3">
+                    <label>Address1:</label>
+                    <input type="text" name="address1" [(ngModel)]="address1" #studentAddress1="ngModel"
+                        class="form-control" placeholder="Enter student address1" required>
+
+                </div>
+                <div class="form-group col-lg-5 col-xl-4 pr-5 mr-5 pt-2 mb-3">
+                    <label>Address2:</label>
+                    <input type="text" name="address2" [(ngModel)]="address2" #studentAddress2="ngModel"
+                        class="form-control" placeholder="Enter student address2">
+
+                </div>
+                <div class="form-group col-lg-5 col-xl-4 pr-5 mr-5 pt-2 mb-3">
+                    <label>Address3:</label>
+                    <input type="text" name="address3" [(ngModel)]="address3" #studentAddress3="ngModel"
+                        class="form-control" placeholder="Enter student address3">
+
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="form-row ">
+                <div class="form-group col-lg-4 col-xl-3 pr-5 mr-5 pt-2 mb-5">
+                    <label>State</label>
+                    <select [(ngModel)]="state" #studentState="ngModel" name="state" class="form-control"
+                        (change)="onChangeState($event.target.value)" id="state" required>
+                        <option value="" disabled selected hidden>Select State</option>
+                        <option *ngFor="let state of stateInfo; let i = index" value="{{i}}">{{state.StateName}}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group col-lg-4 col-xl-3 pr-5 mr-5 pt-2 mb-5">
+                    <label>City</label>
+                    <select [(ngModel)]="city" #studentCity="ngModel" name="city" class="form-control" id="city"
+                        required>
+                        <option *ngIf="cityInfo == ''" value="-1">--Select CIty--</option>
+                        <option *ngFor="let city of cityInfo; let k = index" value="{{k}}">{{city}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-lg-4 col-xl-3 pr-5 mr-5 pt-2 mb-5">
+                    <label>Pin Code:</label>
+                    <input type="text" name="pinCode" [(ngModel)]="pinCode" #code="ngModel" class="form-control"
+                        placeholder="Enter pin code">
+                </div>
+            </div>
+
+            <hr>
+            <div *ngIf="productDetails.length >0">
+                <div class="row ml-1">
+                    <h5>Product Details:</h5>
+                </div>
+                <div class="card d-flex justify-content-center mt-2 mb-2" *ngFor="let product of productDetails">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mt-2 mb-2">
+                                <p class="card-text"><b>Institute:</b> {{product.instituteName}}</p>
+                            </div>
+                            <div class="col-md-6 mt-2 mb-2">
+                                <p class="card-text"><b>Date of joining:</b> {{product.dateOfJoining}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mt-2 mb-2">
+                                <p class="card-text"><b>Exam Name:</b> {{product.examName}}</p>
+                            </div>
+                            <div class="col-md-6 mt-2 mb-2">
+                                <p class="card-text"><b>Exam Year:</b> {{product.examYear}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mt-2 mb-2">
+                                <p class="card-text"><b>Product Name:</b> {{product.productName}}</p>
+                            </div>
+                            <div class="col-md-6 mt-2 mb-2">
+                                <p class="card-text"><b>Product Type:</b> {{product.productType}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" style="margin:5px;" class="btn btn-info"
+                [disabled]="!editStudentForm.form.valid">save</button>
+            <button [routerLink]="['/dashboard']" class="btn btn-info ">cancel</button>
+
+        </form>
+
+
+    </div>
+</div>

@@ -76,7 +76,7 @@ div.content {
 }
 
 @media 
-only screen and (max-width: 700px)
+only screen and (max-width: 1275px)
 {
 
 	/* Force table to not be like tables anymore */
@@ -115,14 +115,26 @@ only screen and (max-width: 700px)
 	/*
 	Label the data
 	*/
-	table.question td:nth-of-type(1):before { content: "Sr. no."; }
-	table.question td:nth-of-type(2):before { content: "Question"; }
-	table.question td:nth-of-type(3):before { content: "Section"; }
-	table.question td:nth-of-type(4):before { content: "Subject"; }
-    table.question td:nth-of-type(5):before { content: "Topic"; }
-    table.question td:nth-of-type(6):before { content: "Question Rating"; }
-    table.question td:nth-of-type(7):before { content: "Language"; }
-    table.question td:nth-of-type(8):before { content: "Insights"; }
-    table.question td:nth-of-type(9):before { content: "Actions"; }
+	table.institute td:nth-of-type(1):before { content: "Sr. no."; }
+	table.institute td:nth-of-type(2):before { content: "Name"; }
+	table.institute td:nth-of-type(3):before { content: "Mobile"; }
+	table.institute td:nth-of-type(4):before { content: "Email"; }
+    table.institute td:nth-of-type(5):before { content: "City"; }
+    table.institute td:nth-of-type(6):before { content: "State"; }
+    table.institute td:nth-of-type(7):before { content: "Status"; }
+    table.institute td:nth-of-type(8):before { content: "Profile"; }
+    table.institute td:nth-of-type(9):before { content: "Action"; }
+
+
+    table.student td:nth-of-type(1):before { content: "Sr. no."; }
+    table.student td:nth-of-type(2):before { content: "Name"; }
+    table.student td:nth-of-type(3):before { content: "Institute Name"; }
+    table.student td:nth-of-type(4):before { content: "Exam Name"; }
+    table.student td:nth-of-type(5):before { content: "Exam Year"; }
+    table.student td:nth-of-type(6):before { content: "Product Type"; }
+    table.student td:nth-of-type(7):before { content: "City"; }
+    table.student td:nth-of-type(8):before { content: "State"; }
+    table.student td:nth-of-type(9):before { content: "Status"; }
+    table.student td:nth-of-type(10):before { content: "Actions"; }
 	
 }
