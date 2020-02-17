@@ -14,6 +14,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { FileUploadModule } from 'ng2-file-upload';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { DashboardService } from '../dashboard.service';
+import { CountriesService } from '../countries.service';
 
 
 
@@ -32,6 +33,6 @@ import { DashboardService } from '../dashboard.service';
     ToastrModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot()
   ],
-  providers: [CookieService,DashboardService]
+  providers: [CookieService,DashboardService,CountriesService]
 })
 export class DashboardModule { }

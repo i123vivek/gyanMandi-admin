@@ -120,11 +120,10 @@ only screen and (max-width: 1275px)
 	table.institute td:nth-of-type(3):before { content: "Mobile"; }
 	table.institute td:nth-of-type(4):before { content: "Email"; }
     table.institute td:nth-of-type(5):before { content: "City"; }
-    table.institute td:nth-of-type(6):before { content: "District"; }
-    table.institute td:nth-of-type(7):before { content: "State"; }
-    table.institute td:nth-of-type(8):before { content: "Status"; }
-    table.institute td:nth-of-type(9):before { content: "Profile"; }
-    table.institute td:nth-of-type(10):before { content: "Action"; }
+    table.institute td:nth-of-type(6):before { content: "State"; }
+    table.institute td:nth-of-type(7):before { content: "Status"; }
+    table.institute td:nth-of-type(8):before { content: "Profile"; }
+    table.institute td:nth-of-type(9):before { content: "Action"; }
 
 
     table.student td:nth-of-type(1):before { content: "Sr. no."; }
@@ -133,7 +132,7 @@ only screen and (max-width: 1275px)
     table.student td:nth-of-type(4):before { content: "Exam Name"; }
     table.student td:nth-of-type(5):before { content: "Exam Year"; }
     table.student td:nth-of-type(6):before { content: "Product Type"; }
-    table.student td:nth-of-type(7):before { content: "District"; }
+    table.student td:nth-of-type(7):before { content: "City"; }
     table.student td:nth-of-type(8):before { content: "State"; }
     table.student td:nth-of-type(9):before { content: "Status"; }
     table.student td:nth-of-type(10):before { content: "Actions"; }
