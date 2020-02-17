@@ -42,7 +42,6 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
         MobileNumber: '9801218546',
         Email: 'fiitjee@gmail.com',
         City: 'Navi Mumbai',
-        District: 'Mumbai',
         State: 'Maharashtra',
         Status: 'Active'
       },
@@ -52,7 +51,6 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
         MobileNumber: '9801218546',
         Email: 'prerna@gmail.com',
         City: 'Jamshedpur',
-        District: 'Jamshedpur',
         State: 'Jharkhand',
         Status: 'Active'
       },
@@ -62,7 +60,6 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
         MobileNumber: '9801218546',
         Email: 'akash@gmail.com',
         City: 'Navi Mumbai',
-        District: 'Mumbai',
         State: 'Maharashtra',
         Status: 'Active'
       },
@@ -72,7 +69,6 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
         MobileNumber: '9801218546',
         Email: 'goal@gmail.com',
         City: 'Ranchi',
-        District: 'Ranchi',
         State: 'Jharkhand',
         Status: 'Active'
       }
@@ -86,7 +82,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
         ExamName: 'IIT JEE',
         ExamYear: '2020',
         ProductType: 'Test-series',
-        District: 'Ranchi',
+        City: 'Ranchi',
         State: 'Jharkhand',
         Status: 'Active'
       },
@@ -97,7 +93,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
         ExamName: 'JAC',
         ExamYear: '2020',
         ProductType: 'Test-series',
-        District: 'Ranchi',
+        City: 'Ranchi',
         State: 'Jharkhand',
         Status: 'Active'
       },
@@ -108,7 +104,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
         ExamName: 'IIT JEE',
         ExamYear: '2020',
         ProductType: 'Test-series',
-        District: 'Ranchi',
+        City: 'Ranchi',
         State: 'Jharkhand',
         Status: 'Active'
       },
@@ -119,7 +115,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
         ExamName: 'IIT JEE',
         ExamYear: '2020',
         ProductType: 'Test-series',
-        District: 'Ranchi',
+        City: 'Ranchi',
         State: 'Jharkhand',
         Status: 'Active'
       }

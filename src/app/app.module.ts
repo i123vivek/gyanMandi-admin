@@ -27,6 +27,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { DashboardService } from './dashboard.service';
 import { ClassroomService } from './classroom.service';
 import { ClassroomModule } from './classroom/classroom.module';
+import { CountriesService } from './countries.service';
 
 
 @NgModule({
@@ -53,7 +54,7 @@ import { ClassroomModule } from './classroom/classroom.module';
     TreeviewModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot()
   ],
-  providers: [CookieService,ExamService,TestService,DashboardService,ClassroomService],
+  providers: [CookieService,ExamService,TestService,DashboardService,ClassroomService,CountriesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
