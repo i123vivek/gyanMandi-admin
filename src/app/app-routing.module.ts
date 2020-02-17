@@ -11,11 +11,20 @@ import { AddTestComponent } from './test-series/add-test/add-test.component';
 import { AddQuestionComponent } from './test-series/add-question/add-question.component';
 import { QuestionPageComponent } from './test-series/question-page/question-page.component';
 import { GenderComponent } from './exam/gender/gender.component';
+import { DashboardViewComponent } from './dashboard/dashboard-view/dashboard-view.component';
+import { InstituteEditComponent } from './dashboard/institute-edit/institute-edit.component';
+import { StudentEditComponent } from './dashboard/student-edit/student-edit.component';
+import { ClassroomDashboardComponent } from './classroom/classroom-dashboard/classroom-dashboard.component';
+import { AddClassroomComponent } from './classroom/add-classroom/add-classroom.component';
+import { AddStudentComponent } from './classroom/add-student/add-student.component';
 
 
 
 const routes: Routes = [
-  { path: '', component: ExaminationComponent},
+  
+  { path: 'dashboard', component: DashboardViewComponent},
+  { path: 'dashboard/:id/institute-edit', component: InstituteEditComponent},
+  { path: 'dashboard/:id/student-edit', component: StudentEditComponent},
   { path: 'examination', component: ExaminationComponent},
   { path: 'gender', component: GenderComponent},
   { path: 'examination/addExam', component: AddExamComponent},
@@ -25,8 +34,15 @@ const routes: Routes = [
   { path: 'test-series', component: TestSeriesComponent},
   { path: 'test-series/addTestSeries', component: AddTestSeriesComponent},
   { path: 'test-series/addTest', component: AddTestComponent},
-  // { path: 'test-series/addQuestion', component: AddQuestionComponent},
-  { path: 'test-series/questionTab', component: QuestionPageComponent},
+  { path: 'test-series/:testSeries/:test/addQuestion', component: AddQuestionComponent},
+  { path: 'test-series/questionTab/:testSeries/:test', component: QuestionPageComponent},
+  { path: 'classroom', component: ClassroomDashboardComponent},
+  { path: 'classroom/addClassroom', component: AddClassroomComponent},
+  { path: 'classroom/addStudent', component: AddStudentComponent},
+  { path: '',  redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '*', component: DashboardViewComponent },
+  { path: '**', component: DashboardViewComponent }
+
   
 ];
 

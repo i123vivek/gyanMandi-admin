@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { from } from 'rxjs';
+import { ExamService } from 'src/app/exam.service';
 
 @Component({
   selector: 'app-examination',
@@ -22,7 +23,7 @@ export class ExaminationComponent implements OnInit, OnDestroy {
   kind: any;
   
 
-  constructor(public toastr: ToastrManager, private _route: ActivatedRoute, private router: Router) { }
+  constructor(public examService: ExamService,public toastr: ToastrManager, private _route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
 
@@ -36,56 +37,6 @@ export class ExaminationComponent implements OnInit, OnDestroy {
         (<any>$('#nav-tab a[href="' + activeTab + '"]')).tab('show');
       }
     });
-
-    
-
-    this.examList = [
-      {
-        Id: "1",
-        ExamName: "IIT JEE",
-        NumberOfPhases: "2",
-        PreferenceOrder: "1",
-        NoOfInstitutes: "23",
-        NoOfStudents: "234",
-        Status: "Active"
-      },
-      {
-        Id: "2",
-        ExamName: "IIT JEE",
-        NumberOfPhases: "2",
-        PreferenceOrder: "1",
-        NoOfInstitutes: "23",
-        NoOfStudents: "234",
-        Status: "Active"
-      },
-      {
-        Id: "3",
-        ExamName: "IIT JEE",
-        NumberOfPhases: "2",
-        PreferenceOrder: "1",
-        NoOfInstitutes: "23",
-        NoOfStudents: "234",
-        Status: "Active"
-      },
-      {
-        Id: "4",
-        ExamName: "IIT JEE",
-        NumberOfPhases: "2",
-        PreferenceOrder: "1",
-        NoOfInstitutes: "23",
-        NoOfStudents: "234",
-        Status: "Active"
-      },
-      {
-        Id: "5",
-        ExamName: "IIT JEE",
-        NumberOfPhases: "2",
-        PreferenceOrder: "1",
-        NoOfInstitutes: "23",
-        NoOfStudents: "234",
-        Status: "Active"
-      }
-    ];
 
     this.subjectList = [
       {
@@ -181,7 +132,30 @@ export class ExaminationComponent implements OnInit, OnDestroy {
       }
     ]
   
+    this.getExamList();
   
+  }
+
+  public getExamList:any = () =>{
+    this.examList= [];
+      this.examService.getExamList().subscribe((apiResponse) =>{
+        for(let x of apiResponse){
+          let temp ={
+            Id: x.id,
+            ExamName: x.name,
+            NumberOfPhases: x.phase_count,
+            PreferenceOrder: "1",
+            NoOfInstitutes: "23",
+            NoOfStudents: "234",
+            Status: "Active"
+          }
+          this.examList.push(temp);
+        }
+
+      },
+      (error) => {
+        this.toastr.errorToastr("Some Error Occurred", "Error!");
+      })
   }
 
   

@@ -17,26 +17,13 @@ import { ExamService } from 'src/app/exam.service';
 })
 export class AddSubjectComponent implements OnInit, OnDestroy {
 
-  public examList = [
-    {
-      examName: 'IIT JEE',
-      phaseNumber: 3
-    },
-    {
-      examName: 'PMT',
-      phaseNumber: 2
-    },
-    {
-      examName: 'GATE',
-      phaseNumber: 1
-    }
-  ];
-
+  public examList = [];
   phaseNumber: any;
   examName: any;
   addSubjectForm: FormGroup;
   submitted: boolean;
   subForm: FormGroup;
+  examId: any;
 
   constructor(private fb: FormBuilder, public examService: ExamService, public toastr: ToastrManager, private location: Location, private _route: ActivatedRoute, private router: Router, private renderer2: Renderer2, @Inject(DOCUMENT) private _document) { }
 
@@ -52,11 +39,16 @@ export class AddSubjectComponent implements OnInit, OnDestroy {
       }
     }
 
+    //console.log("initial exam list",this.examList)
+
     this.addSubjectForm = this.fb.group({
+      examId: ['',Validators.required],
       examName: ['', Validators.required],
       phaseNumber: ['', Validators.required],
       subjectArray: this.fb.array([this.createSubjectForm()])
     })
+
+    this.getExamList();
   }
 
   createSubjectForm(): FormGroup {
@@ -67,6 +59,42 @@ export class AddSubjectComponent implements OnInit, OnDestroy {
       ])
 
     })
+  }
+
+  public getExamList:any = () =>{
+    this.examList= [];
+    
+      this.examService.getExamList().subscribe((apiResponse) =>{
+        //console.log("api response for getting exam list", apiResponse)
+        for(let x of apiResponse){
+          if(this.examList.length == 0){
+            let temp ={
+              examId: x.id,
+              examName: x.name,
+              phaseNumber: x.phase_count
+            }
+            
+            this.examList.push(temp);
+          } else if(this.examList.find(y => y.phaseNumber == x.phase_count && y.examName == x.name)){
+            continue;
+          } else {
+            let temp ={
+              examId: x.id,
+              examName: x.name,
+              phaseNumber: x.phase_count
+            }
+            
+            this.examList.push(temp);
+          }
+          
+        }
+
+        //console.log("exam list here is", this.examList);
+
+      },
+      (error) => {
+        this.toastr.errorToastr("Some Error Occurred", "Error!");
+      })
   }
 
   get subjectArrayFun() {
@@ -83,22 +111,23 @@ export class AddSubjectComponent implements OnInit, OnDestroy {
 
 
   selectPhaseNumber(event: any) {
-    this.examName = event.target.value;
-    console.log("examName is", this.examName)
+    this.examId = event.target.value;
+    //console.log("examId is", this.examId)
     for (let x of this.examList) {
-      if (x.examName == this.examName) {
+      if (x.examId == this.examId) {
+        this.addSubjectForm.controls['examName'].setValue(x.examName);
         this.addSubjectForm.controls['phaseNumber'].setValue(x.phaseNumber);
       }
     }
     this.phaseNumber = this.addSubjectForm.controls['phaseNumber'].value
-    console.log("phaseNumber is", this.addSubjectForm.controls['phaseNumber'].value)
+    //console.log("phaseNumber is", this.addSubjectForm.controls['phaseNumber'].value)
 
     if (this.subjectArrayFun.length > 1) {
       for (let j = this.subjectArrayFun.length; j > 0; j--) {
         this.subjectArrayFun.removeAt(j);
 
       }
-      console.log("inside subjectArray fun", this.subjectArrayFun.length)
+      //console.log("inside subjectArray fun", this.subjectArrayFun.length)
     }
 
     if (this.weightageFun.length > 0) {
@@ -113,25 +142,25 @@ export class AddSubjectComponent implements OnInit, OnDestroy {
     let weightlen = this.weightageFun.length
 
     if (weightlen < this.phaseNumber) {
-      console.log(weightlen)
-      console.log(this.phaseNumber)
+      // console.log(weightlen)
+      // console.log(this.phaseNumber)
       for (let i = 0; i < this.phaseNumber; i++) {
-        console.log("inside for loop")
+        //console.log("inside for loop")
         this.weightageFun.push(this.fb.group({
           weightage: ['', Validators.required],
         }));
 
       }
-      console.log("weightage array is", this.weightageFun);
+      //console.log("weightage array is", this.weightageFun);
       weightlen = this.phaseNumber;
-      console.log(weightlen)
+      //console.log(weightlen)
     } else {
       for (let i = weightlen - 1; i >= this.phaseNumber; i--) {
-        console.log("inside else for loop")
+        //console.log("inside else for loop")
         this.weightageFun.removeAt(i);
       }
       weightlen = this.weightageFun.length
-      console.log(weightlen)
+      //console.log(weightlen)
     }
 
   }
@@ -142,7 +171,7 @@ export class AddSubjectComponent implements OnInit, OnDestroy {
 
       let weightlen = this.weightageFun.length
       if (weightlen < this.phaseNumber) {
-        console.log(weightlen)
+        //console.log(weightlen)
         this.weightageFun.reset();
 
         for (let i = 0; i < this.phaseNumber; i++) {
@@ -151,7 +180,7 @@ export class AddSubjectComponent implements OnInit, OnDestroy {
           }));
         }
         weightlen = this.phaseNumber;
-        console.log(weightlen)
+        //console.log(weightlen)
       } else {
         for (let i = weightlen = 1; i >= this.phaseNumber; i--) {
           this.weightageFun.removeAt(i);

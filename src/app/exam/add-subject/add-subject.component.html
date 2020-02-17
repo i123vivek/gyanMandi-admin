@@ -50,9 +50,9 @@
             <div class="row pt-3 mb-5">
                 <div id="exForm" class="form-group col-lg-4 col-xl-3 pr-5 mr-5">
                     <label>Exam Name</label>
-                    <select class="form-control" (change)="selectPhaseNumber($event)" formControlName="examName">
+                    <select class="form-control" (change)="selectPhaseNumber($event)" formControlName="examId">
                         <option value="" disabled selected hidden>Select The Name of Exam</option>
-                        <option *ngFor="let exam of examList" value="{{exam.examName}}">{{exam.examName}}</option>
+                        <option *ngFor="let exam of examList" value="{{exam.examId}}">{{exam.examName}}</option>
                     </select>
                 </div>
             </div>

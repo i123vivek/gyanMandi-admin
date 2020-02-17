@@ -22,12 +22,13 @@ export class ExamService {
   constructor(public http: HttpClient, public router: Router) { }
 
   private options = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  private options1 = { headers: new HttpHeaders().set('Content-Type',undefined) };
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  }
+  // httpOptions = {
+  //   headers: new HttpHeaders({
+  //     'Content-Type': 'application/json'
+  //   })
+  // }
 
 
   public getExamInfoFromLocalstorage = () => {
@@ -39,8 +40,6 @@ export class ExamService {
   }
 
   public createGender(data: any) : Observable<any>{
-    const params = new HttpParams()
-      .set('gender_code', data)
     return this.http.post(`${this.url}/students/gender/2/`,data, this.options)
   }
 
@@ -49,11 +48,14 @@ export class ExamService {
     return this.http.get(`${this.url}/students/gender/2/`)
   }
 
-  public createExam(file): Observable<any>{
-    return this.http.post(`${this.url}/exams/api/v1/new`,file)
+  
+
+  public createExam(dataObj): Observable<any>{
+
+    return this.http.post(`${this.url}/exams/api/v1/new`,dataObj,this.options)
   }
 
-  public getExamDetails(): Observable<any>{
-    return this.http.get(`${this.url}/api/v1/exams/subject/create`)
+  public getExamList(): Observable<any>{
+    return this.http.get(`${this.url}/exams/api/v1/retrive`)
   }
 }

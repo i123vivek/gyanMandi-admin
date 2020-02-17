@@ -76,7 +76,7 @@ div.content {
 }
 
 @media 
-only screen and (max-width: 700px)
+only screen and (max-width: 1275px)
 {
 
 	/* Force table to not be like tables anymore */
@@ -115,14 +115,24 @@ only screen and (max-width: 700px)
 	/*
 	Label the data
 	*/
-	table.question td:nth-of-type(1):before { content: "Sr. no."; }
-	table.question td:nth-of-type(2):before { content: "Question"; }
-	table.question td:nth-of-type(3):before { content: "Section"; }
-	table.question td:nth-of-type(4):before { content: "Subject"; }
-    table.question td:nth-of-type(5):before { content: "Topic"; }
-    table.question td:nth-of-type(6):before { content: "Question Rating"; }
-    table.question td:nth-of-type(7):before { content: "Language"; }
-    table.question td:nth-of-type(8):before { content: "Insights"; }
-    table.question td:nth-of-type(9):before { content: "Actions"; }
+	table.classroom td:nth-of-type(1):before { content: "Sr. no."; }
+	table.classroom td:nth-of-type(2):before { content: "Institute"; }
+	table.classroom td:nth-of-type(3):before { content: "Exam-Stream"; }
+	table.classroom td:nth-of-type(4):before { content: "Year"; }
+    table.classroom td:nth-of-type(5):before { content: "Batch Name"; }
+    table.classroom td:nth-of-type(6):before { content: "No. of students"; }
+    table.classroom td:nth-of-type(7):before { content: "Insights"; }
+    table.classroom td:nth-of-type(8):before { content: "Actions"; }
+
+
+    table.student td:nth-of-type(1):before { content: "Sr. no."; }
+    table.student td:nth-of-type(2):before { content: "Institute"; }
+    table.student td:nth-of-type(3):before { content: "Exam"; }
+    table.student td:nth-of-type(4):before { content: "Year"; }
+    table.student td:nth-of-type(5):before { content: "Student Name"; }
+    table.student td:nth-of-type(6):before { content: "Contact"; }
+    table.student td:nth-of-type(7):before { content: "Product Type"; }
+    table.student td:nth-of-type(8):before { content: "Insights"; }
+    table.student td:nth-of-type(9):before { content: "Actions"; }
 	
 }
