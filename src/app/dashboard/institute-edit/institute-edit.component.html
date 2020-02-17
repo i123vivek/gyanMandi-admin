@@ -138,6 +138,10 @@
                     <input type="file" class="form-control-file" name="files[]" id="photo" multiple required>
                 </div>
             </div>
+
+            <button type="submit" style="margin:5px;" class="btn btn-info"
+                [disabled]="!editInstituteForm.form.valid">save</button>
+            <button [routerLink]="['/dashboard']" class="btn btn-info ">cancel</button>
         </form>
     </div>
 </div>
