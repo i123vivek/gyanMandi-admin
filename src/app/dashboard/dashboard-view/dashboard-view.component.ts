@@ -20,7 +20,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
   count: Number = 5;
   kind: any;
 
-  constructor(public dashboardService: DashboardService,public toastr: ToastrManager, private _route: ActivatedRoute, private router: Router) { }
+  constructor(public dashboardService: DashboardService, public toastr: ToastrManager, private _route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
 
@@ -35,91 +35,94 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.instituteList = [
-      {
-        Id: '1',
-        InstituteName: 'FIIT JEE',
-        MobileNumber: '9801218546',
-        Email: 'fiitjee@gmail.com',
-        City: 'Navi Mumbai',
-        State: 'Maharashtra',
-        Status: 'Active'
-      },
-      {
-        Id: '2',
-        InstituteName: 'Prerna',
-        MobileNumber: '9801218546',
-        Email: 'prerna@gmail.com',
-        City: 'Jamshedpur',
-        State: 'Jharkhand',
-        Status: 'Active'
-      },
-      {
-        Id: '3',
-        InstituteName: 'Akash',
-        MobileNumber: '9801218546',
-        Email: 'akash@gmail.com',
-        City: 'Navi Mumbai',
-        State: 'Maharashtra',
-        Status: 'Active'
-      },
-      {
-        Id: '4',
-        InstituteName: 'Goal',
-        MobileNumber: '9801218546',
-        Email: 'goal@gmail.com',
-        City: 'Ranchi',
-        State: 'Jharkhand',
-        Status: 'Active'
-      }
-    ];
+    // this.instituteList = [
+    //   {
+    //     Id: '1',
+    //     InstituteName: 'FIIT JEE',
+    //     MobileNumber: '9801218546',
+    //     Email: 'fiitjee@gmail.com',
+    //     City: 'Navi Mumbai',
+    //     State: 'Maharashtra',
+    //     Status: 'Active'
+    //   },
+    //   {
+    //     Id: '2',
+    //     InstituteName: 'Prerna',
+    //     MobileNumber: '9801218546',
+    //     Email: 'prerna@gmail.com',
+    //     City: 'Jamshedpur',
+    //     State: 'Jharkhand',
+    //     Status: 'Active'
+    //   },
+    //   {
+    //     Id: '3',
+    //     InstituteName: 'Akash',
+    //     MobileNumber: '9801218546',
+    //     Email: 'akash@gmail.com',
+    //     City: 'Navi Mumbai',
+    //     State: 'Maharashtra',
+    //     Status: 'Active'
+    //   },
+    //   {
+    //     Id: '4',
+    //     InstituteName: 'Goal',
+    //     MobileNumber: '9801218546',
+    //     Email: 'goal@gmail.com',
+    //     City: 'Ranchi',
+    //     State: 'Jharkhand',
+    //     Status: 'Active'
+    //   }
+    // ];
 
-    this.studentList = [
-      {
-        Id: '1',
-        StudentName: 'student1',
-        InstituteName: 'Akash',
-        ExamName: 'IIT JEE',
-        ExamYear: '2020',
-        ProductType: 'Test-series',
-        City: 'Ranchi',
-        State: 'Jharkhand',
-        Status: 'Active'
-      },
-      {
-        Id: '2',
-        StudentName: 'student2',
-        InstituteName: 'Alpine',
-        ExamName: 'JAC',
-        ExamYear: '2020',
-        ProductType: 'Test-series',
-        City: 'Ranchi',
-        State: 'Jharkhand',
-        Status: 'Active'
-      },
-      {
-        Id: '3',
-        StudentName: 'student3',
-        InstituteName: 'Prerna',
-        ExamName: 'IIT JEE',
-        ExamYear: '2020',
-        ProductType: 'Test-series',
-        City: 'Ranchi',
-        State: 'Jharkhand',
-        Status: 'Active'
-      },
-      {
-        Id: '4',
-        StudentName: 'student4',
-        InstituteName: 'Newton',
-        ExamName: 'IIT JEE',
-        ExamYear: '2020',
-        ProductType: 'Test-series',
-        City: 'Ranchi',
-        State: 'Jharkhand',
-        Status: 'Active'
-      }
-    ]
+    // this.studentList = [
+    //   {
+    //     Id: '1',
+    //     StudentName: 'student1',
+    //     InstituteName: 'Akash',
+    //     ExamName: 'IIT JEE',
+    //     ExamYear: '2020',
+    //     ProductType: 'Test-series',
+    //     City: 'Ranchi',
+    //     State: 'Jharkhand',
+    //     Status: 'Active'
+    //   },
+    //   {
+    //     Id: '2',
+    //     StudentName: 'student2',
+    //     InstituteName: 'Alpine',
+    //     ExamName: 'JAC',
+    //     ExamYear: '2020',
+    //     ProductType: 'Test-series',
+    //     City: 'Ranchi',
+    //     State: 'Jharkhand',
+    //     Status: 'Active'
+    //   },
+    //   {
+    //     Id: '3',
+    //     StudentName: 'student3',
+    //     InstituteName: 'Prerna',
+    //     ExamName: 'IIT JEE',
+    //     ExamYear: '2020',
+    //     ProductType: 'Test-series',
+    //     City: 'Ranchi',
+    //     State: 'Jharkhand',
+    //     Status: 'Active'
+    //   },
+    //   {
+    //     Id: '4',
+    //     StudentName: 'student4',
+    //     InstituteName: 'Newton',
+    //     ExamName: 'IIT JEE',
+    //     ExamYear: '2020',
+    //     ProductType: 'Test-series',
+    //     City: 'Ranchi',
+    //     State: 'Jharkhand',
+    //     Status: 'Active'
+    //   }
+    // ]
+
+    this.getStudentList();
+    this.getInstituteList();
 
   }
 
@@ -130,10 +133,67 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
 
   // public goToStudentEdit(): any {
   //   // here to add student id as route parameter.
-  //   this.router.navigate(['/dashboard/student-edit']);
+  //   this.router.navigate(['/dashboard/student-edit']); .students.students
   // }
 
-  ngOnDestroy(){
+  public getStudentList = () => {
+
+    this.studentList = [];
+    this.dashboardService.getStudentList().subscribe(apiResponse => {
+      console.log("apiResponse is", apiResponse)
+
+      if (apiResponse.response_status_code == 200) {
+        for (let x of apiResponse.students.students) {
+          let temp = {
+           
+            Id: x.id,
+            StudentName: x.name,
+            InstituteName: x.institute_name,
+            ExamName: x.exam,
+            ExamYear: x.year,
+            ProductType: x.product_type,
+            City: x.city, 
+            State: x.state,
+            Status: x.status
+          }
+          this.studentList.push(temp);
+        }
+      }
+    },
+    (error) => {
+      this.toastr.errorToastr("Some Error Occurred", "Error!");
+    })
+  }
+
+
+  public getInstituteList = () => {
+
+    this.instituteList = [];
+    this.dashboardService.getInstituteList().subscribe(apiResponse => {
+      console.log("apiResponse is", apiResponse)
+
+      if (apiResponse.response_status_code == 200) {
+        for (let x of apiResponse.institutes.institutes) {
+          let temp = {
+           
+            Id: x.id,
+            InstituteName: x.name,
+            MobileNumber: x.mobile,
+            Email: x.email,
+            City: x.city, 
+            State: x.state,
+            Status: x.status
+          }
+          this.instituteList.push(temp);
+        }
+      }
+    },
+    (error) => {
+      this.toastr.errorToastr("Some Error Occurred", "Error!");
+    })
+  }
+
+  ngOnDestroy() {
   }
 
 }
