@@ -28,6 +28,7 @@ import { DashboardService } from './dashboard.service';
 import { ClassroomService } from './classroom.service';
 import { ClassroomModule } from './classroom/classroom.module';
 import { CountriesService } from './countries.service';
+// import { PapaParseModule } from 'ngx-papaparse';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { CountriesService } from './countries.service';
     CommonModule,
     CKEditorModule,
     FormsModule,
+    // PapaParseModule,
     DashboardModule,
     ExamModule,
     TestSeriesModule,
