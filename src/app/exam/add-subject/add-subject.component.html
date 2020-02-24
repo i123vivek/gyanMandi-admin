@@ -43,14 +43,14 @@
         </div>
         <hr>
         <!-- add subject form starts here -->
-        <form [formGroup]="addSubjectForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="addSubjectForm" >
 
 
 
             <div class="row pt-3 mb-5">
                 <div id="exForm" class="form-group col-lg-4 col-xl-3 pr-5 mr-5">
                     <label>Exam Name</label>
-                    <select class="form-control" (change)="selectPhaseNumber($event)" formControlName="examId">
+                    <select class="form-control" (change)="selectphase_count($event)" formControlName="examId">
                         <option value="" disabled selected hidden>Select The Name of Exam</option>
                         <option *ngFor="let exam of examList" value="{{exam.examId}}">{{exam.examName}}</option>
                     </select>
@@ -105,7 +105,7 @@
             </div>
 
 
-            <button class="btn btn-info m-1" type="submit" [disabled]="!addSubjectForm.valid">Submit</button>
+            <button class="btn btn-info m-1" type="submit" [disabled]="!addSubjectForm.valid" (click)="addSubject()">Submit</button>
             <button class="btn btn-info m-1" type="reset" (click)="onReset()">Reset</button>
         </form>
 

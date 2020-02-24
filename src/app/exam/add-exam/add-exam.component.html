@@ -178,8 +178,8 @@
                     <label for="Status">Status</label>
                     <select class="form-control" id="selectStatus" [(ngModel)]="status" name="status" required>
                         <option value="" disabled selected hidden>Select status</option>
-                        <option value = "active">active</option>
-                        <option value = "inactive">inactive</option>
+                        <option value = "true">active</option>
+                        <option value = "false">inactive</option>
                     </select>
                 </div>
             </div>
@@ -195,7 +195,7 @@
                         </ckeditor>
             </div>
 
-            <div class="row form-group pt-2 mb-5">
+            <!-- <div class="row form-group pt-2 mb-5">
                 <div class="col-md-6 pr-5 mr-5">
                     <div class="form-group">
                         <label for="aboutExamImage1"><i class="fa fa-cloud-upload"
@@ -203,7 +203,7 @@
                         <input type="file" class="form-control-file" id="about" multiple>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="form-group examPatternForm mt-4 pt-2 mb-5">
                 <label for="examPattern">Exam Pattern</label>
@@ -214,7 +214,7 @@
                         </ckeditor>
             </div>
 
-            <div class="row form-group pt-2 mb-5">
+            <!-- <div class="row form-group pt-2 mb-5">
                 <div class="col-md-6 pr-5 mr-5">
                     <div class="form-group">
                         <label for="examPatternImage1"><i class="fa fa-cloud-upload"
@@ -222,7 +222,7 @@
                         <input type="file" class="form-control-file" id="pattern" multiple>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="form-group syllabusForm mt-4 pt-2 mb-5">
                 <label for="syllabus">Syllabus</label>
@@ -232,11 +232,11 @@
                     <ckeditor  type="text" tagName="textarea" [(ngModel)]="Syllabus" name="Syllabus"
                             [config]="ckeConfig" debounce="500" (change)="onCkeChange($event)" data-sample-short>
                         </ckeditor>
-                        <div class="row" *ngIf = "Syllabus != undefined">syllabus is: {{Syllabus}}</div>
+                        <!-- <div class="row" *ngIf = "Syllabus != undefined">syllabus is: {{Syllabus}}</div> -->
             </div>
             
 
-            <div class="row form-group pt-2 mb-5">
+            <!-- <div class="row form-group pt-2 mb-5">
                 <div class="col-md-6 pr-5 mr-5">
                     <div class="form-group">
                         <label for="syllabusImage1"><i class="fa fa-cloud-upload"
@@ -244,7 +244,7 @@
                         <input type="file" class="form-control-file" id="syllabus" multiple>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <button type="submit" style="margin:5px;" class="btn btn-info" (click)="addExam()"
                 [disabled]="!addExamForm.form.valid">save</button>

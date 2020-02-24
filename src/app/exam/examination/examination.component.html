@@ -116,8 +116,8 @@
                                     <td>{{exam.PreferenceOrder}}</td>
                                     <td>{{exam.NoOfInstitutes}}</td>
                                     <td>{{exam.NoOfStudents}}</td>
-                                    <td>{{exam.Status}}</td>
-                                    <td><i class="fa fa-edit" style="font-size:24px;color:rgb(39, 131, 236);"></i>
+                                    <td>{{exam.Status}}</td> 
+                                    <td><i class="fa fa-edit" [routerLink]="['/examination/editExam',exam.Id]" style="font-size:24px;color:rgb(39, 131, 236);"></i>
                                         &nbsp; <i class="fa fa-trash-o"
                                             style="font-size:24px;color:rgb(39, 131, 236);"></i></td>
                                 </tr>
