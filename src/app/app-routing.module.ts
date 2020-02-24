@@ -17,6 +17,7 @@ import { StudentEditComponent } from './dashboard/student-edit/student-edit.comp
 import { ClassroomDashboardComponent } from './classroom/classroom-dashboard/classroom-dashboard.component';
 import { AddClassroomComponent } from './classroom/add-classroom/add-classroom.component';
 import { AddStudentComponent } from './classroom/add-student/add-student.component';
+import { EditExamComponent } from './exam/edit-exam/edit-exam.component';
 
 
 
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'examination', component: ExaminationComponent},
   { path: 'gender', component: GenderComponent},
   { path: 'examination/addExam', component: AddExamComponent},
+  { path: 'examination/editExam/:id', component: EditExamComponent},
   { path: 'examination/addSubject', component: AddSubjectComponent},
   { path: 'examination/addTopic', component: AddTopicComponent},
   { path: 'examination/addQuestionCategory', component: AddQuestionCategoryComponent},

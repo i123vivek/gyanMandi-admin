@@ -38,57 +38,57 @@ export class ExaminationComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.subjectList = [
-      {
-        Id: "1",
-        ExamName: "IIT JEE",
-        SubjectName: "Mathematics",
-        NumberOfTopics: "12",
-        NumberOfSubtopics: "111",
-      },
-      {
-        Id: "2",
-        ExamName: "PMT",
-        SubjectName: "PHYSICS",
-        NumberOfTopics: "14",
-        NumberOfSubtopics: "123",
-      },
-      {
-        Id: "3",
-        ExamName: "GATE",
-        SubjectName: "Mathematics",
-        NumberOfTopics: "20",
-        NumberOfSubtopics: "231",
-      },
-      {
-        Id: "4",
-        ExamName: "IIT JEE",
-        SubjectName: "Mathematics",
-        NumberOfTopics: "12",
-        NumberOfSubtopics: "111",
-      },
-      {
-        Id: "5",
-        ExamName: "GATE",
-        SubjectName: "Mathematics",
-        NumberOfTopics: "12",
-        NumberOfSubtopics: "111",
-      },
-      {
-        Id: "6",
-        ExamName: "IIT JEE",
-        SubjectName: "Mathematics",
-        NumberOfTopics: "12",
-        NumberOfSubtopics: "111",
-      },
-      {
-        Id: "7",
-        ExamName: "IIT JEE",
-        SubjectName: "Mathematics",
-        NumberOfTopics: "12",
-        NumberOfSubtopics: "111",
-      }
-    ];
+    // this.subjectList = [
+    //   {
+    //     Id: "1",
+    //     ExamName: "IIT JEE",
+    //     SubjectName: "Mathematics",
+    //     NumberOfTopics: "12",
+    //     NumberOfSubtopics: "111",
+    //   },
+    //   {
+    //     Id: "2",
+    //     ExamName: "PMT",
+    //     SubjectName: "PHYSICS",
+    //     NumberOfTopics: "14",
+    //     NumberOfSubtopics: "123",
+    //   },
+    //   {
+    //     Id: "3",
+    //     ExamName: "GATE",
+    //     SubjectName: "Mathematics",
+    //     NumberOfTopics: "20",
+    //     NumberOfSubtopics: "231",
+    //   },
+    //   {
+    //     Id: "4",
+    //     ExamName: "IIT JEE",
+    //     SubjectName: "Mathematics",
+    //     NumberOfTopics: "12",
+    //     NumberOfSubtopics: "111",
+    //   },
+    //   {
+    //     Id: "5",
+    //     ExamName: "GATE",
+    //     SubjectName: "Mathematics",
+    //     NumberOfTopics: "12",
+    //     NumberOfSubtopics: "111",
+    //   },
+    //   {
+    //     Id: "6",
+    //     ExamName: "IIT JEE",
+    //     SubjectName: "Mathematics",
+    //     NumberOfTopics: "12",
+    //     NumberOfSubtopics: "111",
+    //   },
+    //   {
+    //     Id: "7",
+    //     ExamName: "IIT JEE",
+    //     SubjectName: "Mathematics",
+    //     NumberOfTopics: "12",
+    //     NumberOfSubtopics: "111",
+    //   }
+    // ];
 
     this.TopicList =[
       {
@@ -133,23 +133,70 @@ export class ExaminationComponent implements OnInit, OnDestroy {
     ]
   
     this.getExamList();
+    this.getSubjectList();
   
+  }
+
+  public getSubjectList:any = ()=>{
+    this.subjectList=[];
+    this.examService.getSubjectList().subscribe((apiResponse) =>{
+      console.log("apiresponse status is",apiResponse.response_status_code)
+
+      if(apiResponse.response_status_code === 200){
+        
+        // for(let x of apiResponse.subjects){
+          for (let y of apiResponse.subjects.subjects){
+            let temp = {
+              Id: 1,
+              ExamName: apiResponse.subjects.examName ,
+              SubjectName:y.name ,
+              NumberOfTopics: "12",
+              NumberOfSubtopics: "111",
+            }
+            this.subjectList.push(temp);
+          }
+          
+        // }
+      }
+      
+    },(error) => {
+      this.toastr.errorToastr("Some Error Occurred", "Error!");
+    })
   }
 
   public getExamList:any = () =>{
     this.examList= [];
       this.examService.getExamList().subscribe((apiResponse) =>{
-        for(let x of apiResponse){
-          let temp ={
-            Id: x.id,
-            ExamName: x.name,
-            NumberOfPhases: x.phase_count,
-            PreferenceOrder: "1",
-            NoOfInstitutes: "23",
-            NoOfStudents: "234",
-            Status: "Active"
-          }
+        console.log("apiresponse is",apiResponse.executed_exams);
+        for(let x of apiResponse.executed_exams){
+          if(x.status == true){
+            let temp ={
+              Id: x.id,
+              ExamName: x.name,
+              NumberOfPhases: x.phase_count,
+              PreferenceOrder: "1",
+              NoOfInstitutes: "23",
+              NoOfStudents: "234",
+              Status: "Active"
+            }
           this.examList.push(temp);
+          
+          }
+
+          if(x.status == false){
+            let temp ={
+              Id: x.id,
+              ExamName: x.name,
+              NumberOfPhases: x.phase_count,
+              PreferenceOrder: "1",
+              NoOfInstitutes: "23",
+              NoOfStudents: "234",
+              Status: "Inactive"
+            }
+          this.examList.push(temp);
+          
+          }
+          //this.examList.push(temp);
         }
 
       },

@@ -52,10 +52,18 @@ export class ExamService {
 
   public createExam(dataObj): Observable<any>{
 
-    return this.http.post(`${this.url}/exams/api/v1/new`,dataObj,this.options)
+    return this.http.post(`${this.url}/exams/add/`,dataObj,this.options)
+  }
+
+  public addSubject(dataObj): Observable<any>{
+    return this.http.post(`${this.url}/exams/subject/executed/add/`,dataObj,this.options)
   }
 
   public getExamList(): Observable<any>{
-    return this.http.get(`${this.url}/exams/api/v1/retrive`)
+    return this.http.get(`${this.url}/exams/executed/`)
+  }
+
+  public getSubjectList(): Observable<any>{
+    return this.http.get(`${this.url}/exams/subjects/all/`)
   }
 }

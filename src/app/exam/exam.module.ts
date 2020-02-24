@@ -18,12 +18,13 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AddTopicComponent } from './add-topic/add-topic.component';
 import { AddQuestionCategoryComponent } from './add-question-category/add-question-category.component';
 import { GenderComponent } from './gender/gender.component';
+import { EditExamComponent } from './edit-exam/edit-exam.component';
 
 
 
 
 @NgModule({
-  declarations: [ExaminationComponent, AddExamComponent, AddSubjectComponent, AddTopicComponent, AddQuestionCategoryComponent, GenderComponent],
+  declarations: [ExaminationComponent, AddExamComponent, AddSubjectComponent, AddTopicComponent, AddQuestionCategoryComponent, GenderComponent, EditExamComponent],
   imports: [
     CommonModule,
     AppRoutingModule,

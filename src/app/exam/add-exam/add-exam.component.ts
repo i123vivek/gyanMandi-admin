@@ -125,91 +125,99 @@ export class AddExamComponent implements OnInit, OnDestroy {
   public addExam = () => {
 
     let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#photo');
-    let inputElP: HTMLInputElement = this.el.nativeElement.querySelector('#pattern');
-    let inputElS: HTMLInputElement = this.el.nativeElement.querySelector('#syllabus');
-    let inputElA: HTMLInputElement = this.el.nativeElement.querySelector('#about');
+    // let inputElP: HTMLInputElement = this.el.nativeElement.querySelector('#pattern');
+    // let inputElS: HTMLInputElement = this.el.nativeElement.querySelector('#syllabus');
+    // let inputElA: HTMLInputElement = this.el.nativeElement.querySelector('#about');
     let examImageFileCount: number = inputEl.files.length;
-    let examPatternFileCount: number = inputElP.files.length;
-    let examSyllabusFileCount: number = inputElS.files.length;
-    let aboutExamFileCount: number = inputElA.files.length;
+    // let examPatternFileCount: number = inputElP.files.length;
+    // let examSyllabusFileCount: number = inputElS.files.length;
+    // let aboutExamFileCount: number = inputElA.files.length;
     let examImageFile = inputEl.files[0];
-    let examPatternFile = inputElP.files[0];
-    let examSyllabusFile = inputElS.files[0];
-    let aboutExamFile = inputElA.files[0];
+    // let examPatternFile = inputElP.files[0];
+    // let examSyllabusFile = inputElS.files[0];
+    // let aboutExamFile = inputElA.files[0];
 
     var phaseObjForPhase1 = [{
-      phase_name: this.examName,
+      phase:1,
+      name: this.examName,
       weightage: this.weightageOfExam
     }];
 
     let phaseObjForPhase2 = [{
-      phase_name: this.phaseName1,
+      phase:1,
+      name: this.phaseName1,
       weightage: this.weightageOfPhase1
     },
     {
-      phase_name: this.phaseName2,
+      phase:2,
+      name: this.phaseName2,
       weightage: this.weightageOfPhase2
     }];
 
     let phaseObjForPhase3 = [{
-      phase_name: this.phaseName1,
+      phase:1,
+      name: this.phaseName1,
       weightage: this.weightageOfPhase1
     },
     {
-      phase_name: this.phaseName2,
+      phase:2,
+      name: this.phaseName2,
       weightage: this.weightageOfPhase2
     },
     {
-      phase_name: this.phaseName3,
+      phase:3,
+      name: this.phaseName3,
       weightage: this.weightageOfPhase3
     }]
 
 
     console.log('exam image file here is', examImageFile);
-    console.log('exam pattern pdf file here is', examPatternFile);
-    console.log('exam syllabus pdf file here is', examSyllabusFile);
-    console.log('about exam pdf file here is', aboutExamFile);
+    // console.log('exam pattern pdf file here is', examPatternFile);
+    // console.log('exam syllabus pdf file here is', examSyllabusFile);
+    // console.log('about exam pdf file here is', aboutExamFile);
 
     var formData = new FormData();
 
     formData.append('name', this.examName);
     //console.log("form data",formData.get('name'));
-    formData.append('year', this.examYear);
+    formData.append('years', this.examYear);
     formData.append('status', this.status); //this.status
-    formData.append('pattern_txt', this.examPattern); //this.examPattern
-    formData.append('syllabus_txt', this.Syllabus); //this.Syllabus
-    formData.append('about_txt', this.aboutExam); //this.aboutExam
+    formData.append('exam_pattern', this.examPattern); //this.examPattern
+    formData.append('syllabus', this.Syllabus); //this.Syllabus
+    formData.append('about', this.aboutExam); //this.aboutExam
 
     if (this.phaseNumber == 3) {
-      var data = { "phase": phaseObjForPhase3 };
+      var data = { "phases": phaseObjForPhase3 };
     } else if (this.phaseNumber == 2) {
-      var data = { "phase": phaseObjForPhase2 };
+      var data = { "phases": phaseObjForPhase2 };
     } else if (this.phaseNumber == 1) {
-      var data = { "phase": phaseObjForPhase1 };
+      var data = { "phases": phaseObjForPhase1 };
     }
 
     if (examImageFileCount > 0) {
       for (let i = 0; i < examImageFileCount; i++) {
-        formData.append('image', inputEl.files[i]);
+        formData.append('image_url', inputEl.files[i]);
       }
     }
-    if (examPatternFileCount > 0) {
-      for (let i = 0; i < examPatternFileCount; i++) {
-        formData.append('pattern_pdf', inputElP.files[i]);
-      }
-    }
-    if (examSyllabusFileCount > 0) {
-      for (let i = 0; i < examSyllabusFileCount; i++) {
-        formData.append('syllabus_pdf', inputElS.files[i]);
-      }
-    }
-    if (aboutExamFileCount > 0) {
-      for (let i = 0; i < aboutExamFileCount; i++) {
-        formData.append('about_pdf', inputElA.files[i]);
-      }
-    }
+    // if (examPatternFileCount > 0) {
+    //   for (let i = 0; i < examPatternFileCount; i++) {
+    //     formData.append('pattern_pdf', inputElP.files[i]);
+    //   }
+    // }
+    // if (examSyllabusFileCount > 0) {
+    //   for (let i = 0; i < examSyllabusFileCount; i++) {
+    //     formData.append('syllabus_pdf', inputElS.files[i]);
+    //   }
+    // }
+    // if (aboutExamFileCount > 0) {
+    //   for (let i = 0; i < aboutExamFileCount; i++) {
+    //     formData.append('about_pdf', inputElA.files[i]);
+    //   }
+    // }
 
     let jsonObject = {};
+
+    console.log("form data entries is", formData.entries());
 
     for (const [key, value] of formData.entries()) {
       jsonObject[key] = value;
