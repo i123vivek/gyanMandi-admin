@@ -133,6 +133,8 @@ export class AddTestComponent implements OnInit, OnDestroy {
   dropdownSettings = {};
 
    expanded = false;
+  public submitted: boolean = false;
+  buttonClass: any;
 
   constructor(private fb: FormBuilder, private service: TestService, public toastr: ToastrManager, private location: Location, private _route: ActivatedRoute, private router: Router, private renderer2: Renderer2, @Inject(DOCUMENT) private _document) { }
 

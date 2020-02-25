@@ -15,8 +15,8 @@ export class ClassroomDashboardComponent implements OnInit, OnDestroy {
   public classroomList: any = [];
   public studentList: any = [];
 
-  p: Number = 1;
-  count: Number = 5;
+  p: number = 1;
+  count: number = 5;
   kind: any;
 
   constructor(public classroomService: ClassroomService,public toastr: ToastrManager, private _route: ActivatedRoute, private router: Router) { }

@@ -40,6 +40,7 @@ export class AddExamComponent implements OnInit, OnDestroy {
   dropdownSettings = {};
   form: FormGroup;
   ckeConfig: any;
+  public submitted: boolean = false;
 
 
   constructor(public examService: ExamService, private location: Location, public toastr: ToastrManager, private _route: ActivatedRoute, private router: Router, private renderer2: Renderer2, @Inject(DOCUMENT) private _document, private el: ElementRef) { }
@@ -138,34 +139,28 @@ export class AddExamComponent implements OnInit, OnDestroy {
     // let aboutExamFile = inputElA.files[0];
 
     var phaseObjForPhase1 = [{
-      phase:1,
       name: this.examName,
       weightage: this.weightageOfExam
     }];
 
     let phaseObjForPhase2 = [{
-      phase:1,
       name: this.phaseName1,
       weightage: this.weightageOfPhase1
     },
     {
-      phase:2,
       name: this.phaseName2,
       weightage: this.weightageOfPhase2
     }];
 
     let phaseObjForPhase3 = [{
-      phase:1,
       name: this.phaseName1,
       weightage: this.weightageOfPhase1
     },
     {
-      phase:2,
       name: this.phaseName2,
       weightage: this.weightageOfPhase2
     },
     {
-      phase:3,
       name: this.phaseName3,
       weightage: this.weightageOfPhase3
     }]

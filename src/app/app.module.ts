@@ -28,6 +28,7 @@ import { DashboardService } from './dashboard.service';
 import { ClassroomService } from './classroom.service';
 import { ClassroomModule } from './classroom/classroom.module';
 import { CountriesService } from './countries.service';
+import { ModalModule } from 'ngx-bootstrap/modal';
 // import { PapaParseModule } from 'ngx-papaparse';
 
 
@@ -54,7 +55,8 @@ import { CountriesService } from './countries.service';
     NgbModule,
     ToastrModule.forRoot(),
     TreeviewModule.forRoot(),
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [CookieService,ExamService,TestService,DashboardService,ClassroomService,CountriesService],
   bootstrap: [AppComponent]

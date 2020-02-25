@@ -16,8 +16,8 @@ export class TestSeriesComponent implements OnInit, OnDestroy {
   public QuestionList: any = [];
 
 
-  p: Number = 1;
-  count: Number = 5;
+  p: number = 1;
+  count: number = 5;
   kind: any;
 
   constructor(public toastr: ToastrManager, private _route: ActivatedRoute, private router: Router) { }
