@@ -11,8 +11,8 @@ import { from } from 'rxjs';
 })
 export class QuestionPageComponent implements OnInit, OnDestroy {
 
-  p: Number = 1;
-  count: Number = 5;
+  p: number = 1;
+  count: number = 5;
   QuestionPageList: any = [];
   testSeries: any;
   test: any;

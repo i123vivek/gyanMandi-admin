@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { from } from 'rxjs';
 import { ExamService } from 'src/app/exam.service';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-examination',
@@ -17,13 +18,15 @@ export class ExaminationComponent implements OnInit, OnDestroy {
   public TopicList: any[];
   public QuestionList: any[];
 
+  modalRef: BsModalRef;
 
-  p: Number = 1;
-  count: Number = 5;
+
+  p: number = 1;
+  count: number = 5;
   kind: any;
   
 
-  constructor(public examService: ExamService,public toastr: ToastrManager, private _route: ActivatedRoute, private router: Router) { }
+  constructor(public examService: ExamService,public toastr: ToastrManager, private _route: ActivatedRoute, private router: Router, private modalService: BsModalService) { }
 
   ngOnInit() {
 
@@ -135,6 +138,10 @@ export class ExaminationComponent implements OnInit, OnDestroy {
     this.getExamList();
     this.getSubjectList();
   
+  }
+
+  openConfirmationModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
   }
 
   public getSubjectList:any = ()=>{

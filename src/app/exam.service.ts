@@ -55,8 +55,16 @@ export class ExamService {
     return this.http.post(`${this.url}/exams/add/`,dataObj,this.options)
   }
 
+  public editExam(examId,examdata): Observable<any>{
+    return this.http.post(`${this.url}/exams/update/?id=${examId}`,examdata,this.options);
+  }
+
   public addSubject(dataObj): Observable<any>{
     return this.http.post(`${this.url}/exams/subject/executed/add/`,dataObj,this.options)
+  }
+
+  public getExamDetails(examId): Observable<any>{
+    return this.http.get(`${this.url}/exams/executed_exam/?id=${examId}`)
   }
 
   public getExamList(): Observable<any>{

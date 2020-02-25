@@ -19,12 +19,14 @@ import { AddTopicComponent } from './add-topic/add-topic.component';
 import { AddQuestionCategoryComponent } from './add-question-category/add-question-category.component';
 import { GenderComponent } from './gender/gender.component';
 import { EditExamComponent } from './edit-exam/edit-exam.component';
+import { EditSubjectComponent } from './edit-subject/edit-subject.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 
 
 @NgModule({
-  declarations: [ExaminationComponent, AddExamComponent, AddSubjectComponent, AddTopicComponent, AddQuestionCategoryComponent, GenderComponent, EditExamComponent],
+  declarations: [ExaminationComponent, AddExamComponent, AddSubjectComponent, AddTopicComponent, AddQuestionCategoryComponent, GenderComponent, EditExamComponent, EditSubjectComponent],
   imports: [
     CommonModule,
     AppRoutingModule,
@@ -36,7 +38,8 @@ import { EditExamComponent } from './edit-exam/edit-exam.component';
     NgbModule,
     FileUploadModule,
     ToastrModule.forRoot(),
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [CookieService,ExamService],
 })
