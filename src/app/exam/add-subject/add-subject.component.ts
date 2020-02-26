@@ -31,15 +31,15 @@ export class AddSubjectComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    var div = document.getElementById('exForm');
-    var btn = document.getElementById('topicButton');
-    btn.onclick = function (e) {
-      let elements = div.querySelectorAll('input, select, textarea, checkbox, radio, button');
+    // var div = document.getElementById('exForm');
+    // var btn = document.getElementById('topicButton');
+    // btn.onclick = function (e) {
+    //   let elements = div.querySelectorAll('input, select, textarea, checkbox, radio, button');
 
-      for (let i = 0; i < elements.length; i++) {
-        elements[i].setAttribute('disabled', 'true');
-      }
-    }
+    //   for (let i = 0; i < elements.length; i++) {
+    //     elements[i].setAttribute('disabled', 'true');
+    //   }
+    // }
 
     //console.log("initial exam list",this.examList)
 
@@ -47,6 +47,7 @@ export class AddSubjectComponent implements OnInit, OnDestroy {
       examId: ['',Validators.required],
       examName: ['', Validators.required],
       phase_count: ['', Validators.required],
+      subjectStatus: ['',Validators.required],
       subjectArray: this.fb.array([this.createSubjectForm()])
     })
 
@@ -219,13 +220,14 @@ export class AddSubjectComponent implements OnInit, OnDestroy {
     var formData = new FormData();
 
     formData.append('executed_exam_id',this.examId);
+    formData.append('is_active',this.addSubjectForm.controls['subjectStatus'].value)
     //console.log("form data",formData.get('name'));
     //formData.append('phase_count', this.phase_count);
     //formData.append('weightages', this.weight); //this.status
     formData.append('name', this.subName); //this.examPattern
     // formData.append('syllabus', this.Syllabus); //this.Syllabus
     // formData.append('about', this.aboutExam); //this.aboutExam
-    var data = {"weightages" : this.weight} ;
+    var data = {"phase_weightages" : this.weight} ;
     // if (this.phaseNumber == 3) {
     //   var data = { "phases": phaseObjForPhase3 };
     // } else if (this.phaseNumber == 2) {

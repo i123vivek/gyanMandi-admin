@@ -118,11 +118,11 @@ only screen and (max-width: 700px)
 	table.exam td:nth-of-type(1):before { content: "Sr. no."; }
 	table.exam td:nth-of-type(2):before { content: "Exam Name"; }
 	table.exam td:nth-of-type(3):before { content: "Number of phases"; }
-	table.exam td:nth-of-type(4):before { content: "Preference Order"; }
-    table.exam td:nth-of-type(5):before { content: "No. of Institutes"; }
-    table.exam td:nth-of-type(6):before { content: "No. of Students"; }
-    table.exam td:nth-of-type(7):before { content: "Status"; }
-    table.exam td:nth-of-type(8):before { content: "Actions"; }
+	/* table.exam td:nth-of-type(4):before { content: "Preference Order"; } */
+    table.exam td:nth-of-type(4):before { content: "No. of Institutes"; }
+    table.exam td:nth-of-type(5):before { content: "No. of Students"; }
+    table.exam td:nth-of-type(6):before { content: "Status"; }
+    table.exam td:nth-of-type(7):before { content: "Actions"; }
 
 
     table.subject td:nth-of-type(1):before { content: "Sr. no."; }
@@ -130,7 +130,8 @@ only screen and (max-width: 700px)
     table.subject td:nth-of-type(3):before { content: "Subject Name"; }
     table.subject td:nth-of-type(4):before { content: "Number Of Topics"; }
     table.subject td:nth-of-type(5):before { content: "Number Of Subtopics"; }
-    table.subject td:nth-of-type(6):before { content: "Insights"; }
-    table.subject td:nth-of-type(7):before { content: "Actions"; }
+    table.subject td:nth-of-type(6):before { content: "Status"; }
+    table.subject td:nth-of-type(7):before { content: "Insights"; }
+    table.subject td:nth-of-type(8):before { content: "Actions"; }
 	
 }

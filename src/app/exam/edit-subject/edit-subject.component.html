@@ -43,7 +43,7 @@
         </div>
         <hr>
         <!-- add subject form starts here -->
-        <form [formGroup]="addSubjectForm" >
+        <form [formGroup]="editSubjectForm" >
 
 
 
@@ -60,7 +60,7 @@
 
             <div formArrayName="subjectArray">
 
-                <div class="subjectArray" *ngFor="let sub of addSubjectForm.get('subjectArray')['controls']; let i= index"
+                <div class="subjectArray" *ngFor="let sub of editSubjectForm.get('subjectArray')['controls']; let i= index"
                     [formGroupName]="i">
 
                     <div [formGroup]="sub">
@@ -100,12 +100,12 @@
                 </div>
 
                 <button id="topicButton" class="btn btn-info m-2" (click)="addMoreSubject()"
-                    [disabled]="!addSubjectForm.valid">Add New
+                    [disabled]="!editSubjectForm.valid">Add New
                     Subject</button>
             </div>
 
 
-            <button class="btn btn-info m-1" type="submit" [disabled]="!addSubjectForm.valid" (click)="addSubject()">Submit</button>
+            <button class="btn btn-info m-1" type="submit" [disabled]="!editSubjectForm.valid" (click)="addSubject()">Submit</button>
             <button class="btn btn-info m-1" type="reset" (click)="onReset()">Reset</button>
         </form>
 
