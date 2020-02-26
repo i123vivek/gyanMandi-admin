@@ -99,7 +99,7 @@
                                     <th>Sr. no.</th>
                                     <th>Exam Name</th>
                                     <th>Number of phases</th>
-                                    <th>Preference Order</th>
+                                    <!-- <th>Preference Order</th> -->
                                     <th>No. of Institutes</th>
                                     <th>No. of Students</th>
                                     <th>Status</th>
@@ -113,7 +113,7 @@
                                     <td>{{exam.Id}}</td>
                                     <td>{{exam.ExamName}}</td>
                                     <td>{{exam.NumberOfPhases}}</td>
-                                    <td>{{exam.PreferenceOrder}}</td>
+                                    <!-- <td>{{exam.PreferenceOrder}}</td> -->
                                     <td>{{exam.NoOfInstitutes}}</td>
                                     <td>{{exam.NoOfStudents}}</td>
                                     <td>{{exam.Status}}</td> 
@@ -185,7 +185,8 @@
                                     <th>Subject Name</th>
                                     <th>Number Of Topics</th>
                                     <th>Number Of Subtopics</th>
-                                    <th>Insights</th>
+                                    <th>Status</th>
+                                    <th>Insights</th>                                   
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -198,6 +199,7 @@
                                     <td>{{subject.SubjectName}}</td>
                                     <td>{{subject.NumberOfTopics}}</td>
                                     <td>{{subject.NumberOfSubtopics}}</td>
+                                    <td>{{subject.subjectStatus}}</td>
                                     <td><button type="button" class="btn btn-link">Click</button></td>
                                     <td><i class="fa fa-edit d-flex justify-content-center" [routerLink]="['/examination/editSubject',subject.Id]" style="font-size:24px;color:rgb(39, 131, 236);"></i>
                                         <!-- &nbsp; <i class="fa fa-trash-o"

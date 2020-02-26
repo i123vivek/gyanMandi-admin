@@ -41,58 +41,6 @@ export class ExaminationComponent implements OnInit, OnDestroy {
       }
     });
 
-    // this.subjectList = [
-    //   {
-    //     Id: "1",
-    //     ExamName: "IIT JEE",
-    //     SubjectName: "Mathematics",
-    //     NumberOfTopics: "12",
-    //     NumberOfSubtopics: "111",
-    //   },
-    //   {
-    //     Id: "2",
-    //     ExamName: "PMT",
-    //     SubjectName: "PHYSICS",
-    //     NumberOfTopics: "14",
-    //     NumberOfSubtopics: "123",
-    //   },
-    //   {
-    //     Id: "3",
-    //     ExamName: "GATE",
-    //     SubjectName: "Mathematics",
-    //     NumberOfTopics: "20",
-    //     NumberOfSubtopics: "231",
-    //   },
-    //   {
-    //     Id: "4",
-    //     ExamName: "IIT JEE",
-    //     SubjectName: "Mathematics",
-    //     NumberOfTopics: "12",
-    //     NumberOfSubtopics: "111",
-    //   },
-    //   {
-    //     Id: "5",
-    //     ExamName: "GATE",
-    //     SubjectName: "Mathematics",
-    //     NumberOfTopics: "12",
-    //     NumberOfSubtopics: "111",
-    //   },
-    //   {
-    //     Id: "6",
-    //     ExamName: "IIT JEE",
-    //     SubjectName: "Mathematics",
-    //     NumberOfTopics: "12",
-    //     NumberOfSubtopics: "111",
-    //   },
-    //   {
-    //     Id: "7",
-    //     ExamName: "IIT JEE",
-    //     SubjectName: "Mathematics",
-    //     NumberOfTopics: "12",
-    //     NumberOfSubtopics: "111",
-    //   }
-    // ];
-
     this.TopicList =[
       {
         Id: "1",
@@ -150,15 +98,18 @@ export class ExaminationComponent implements OnInit, OnDestroy {
       console.log("apiresponse status is",apiResponse.response_status_code)
 
       if(apiResponse.response_status_code === 200){
+
+        console.log("exam name in get subject list is",apiResponse.subjects.examName)
         
         // for(let x of apiResponse.subjects){
           for (let y of apiResponse.subjects.subjects){
             let temp = {
-              Id: 1,
+              Id: y.id,
               ExamName: apiResponse.subjects.examName ,
               SubjectName:y.name ,
-              NumberOfTopics: "12",
-              NumberOfSubtopics: "111",
+              subjectStatus: "Active",
+              NumberOfTopics: apiResponse.subjects.topic_count,
+              NumberOfSubtopics: apiResponse.subjects.subtopic_count,
             }
             this.subjectList.push(temp);
           }
@@ -181,7 +132,7 @@ export class ExaminationComponent implements OnInit, OnDestroy {
               Id: x.id,
               ExamName: x.name,
               NumberOfPhases: x.phase_count,
-              PreferenceOrder: "1",
+              // PreferenceOrder: "1",
               NoOfInstitutes: "23",
               NoOfStudents: "234",
               Status: "Active"
@@ -195,7 +146,7 @@ export class ExaminationComponent implements OnInit, OnDestroy {
               Id: x.id,
               ExamName: x.name,
               NumberOfPhases: x.phase_count,
-              PreferenceOrder: "1",
+              // PreferenceOrder: "1",
               NoOfInstitutes: "23",
               NoOfStudents: "234",
               Status: "Inactive"
